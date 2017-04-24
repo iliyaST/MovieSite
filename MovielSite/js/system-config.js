@@ -16,7 +16,7 @@ SystemJS.config({
         //    'templates': 'js/templates.js',
 
         // Library files
-        'main': './js/main.js',
+        'main': 'js/main.js',
         'jquery': './node_modules/jquery/dist/jquery.min.js'
 
 

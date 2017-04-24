@@ -6,15 +6,14 @@ class MyRouter {
 
     on(url, callback) {
         //push the url and the callback in the array;
-        //return this gives the ability to chane
+        //return this gives the ability to chain
         this._routes.push({ url, callback });
-        retrun this;
+        return this;
     }
 
     navigate() {
         //this removes the # from the url 
         const currentUrl = location.hash.slice(1);
-
 
         for (const { taregetUrl, callback }
             of this._routes) {
@@ -56,7 +55,6 @@ class MyRouter {
         }
 
         return params;
-
     }
 }
 
