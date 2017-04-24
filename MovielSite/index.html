@@ -1,101 +1,104 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title></title>
-  <meta charset="utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
 
-  <script src="./node_modules/systemjs/dist/system.js"></script>
-  <script src="./js/system-config.js"></script>
-	
-  <!-- Bootstrap Core CSS -->
-  <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+    <script src="./node_modules/systemjs/dist/system.js"></script>
+    <script src="./js/system-config.js"></script>
 
-  <!-- jQuery -->
-  <script src="libs/jquery/jquery.min.js"></script>
-	
-  <script src="./node_modules/navigo/lib/navigo.js"></script>
+    <!-- Bootstrap Core CSS -->
+    <link href="./libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 
-  <script>
-      System.import('main');
-  </script>
+    <!-- jQuery -->
+    <script src="./libs/jquery/jquery.min.js"></script>
+
+    <script src="./node_modules/navigo/lib/navigo.js"></script>
+
+    <script>
+        System.import('main');
+    </script>
 
 </head>
+
 <body>
-  <!-- Navigation -->
-  <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
 
-      <div class="navbar-header">
-        <span class="navbar-brand">Movie Site</span>
-      </div>
+            <div class="navbar-header">
+                <span class="navbar-brand">Movie Site</span>
+            </div>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="#/home">Home</a>
-          </li>
-          <li>
-            <a href="#/upcoming">Upcoming Movies</a>
-          </li>
-          <li>
-            <a href="#/cinema">Watch A Movie</a>
-          </li>
-          <li>
-            <a href="#/posts">Top Movies</a>
-          </li>
-          <li>
-            <a id="btn-user" href="#/posts">Posts</a>
-          </li>
-          <li>
-            <a href="#/users">Users</a>
-          </li>
-          <li>
-            <a href="#/profile">Profile</a>
-          </li>
-          <li>
-            <a id="btn-signup" class="glyphicon glyphicon-plus-sign " href="#/register"> Register</a>
-          </li>
-          <li>
-            <a id="btn-login" class=" glyphicon glyphicon-log-in" href="#/login"> Log In</a>
-          </li>
-          <li>
-            <a id="btn-logout" class=" glyphicon glyphicon-log-out hidden" href="#/logout"> Log Out</a>
-          </li>
-        </ul>
-      </div>
-      <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-  </nav>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#/home">Home</a>
+                    </li>
+                    <li>
+                        <a href="#/upcoming">Upcoming Movies</a>
+                    </li>
+                    <li>
+                        <a href="#/cinema">Watch A Movie</a>
+                    </li>
+                    <li>
+                        <a href="#/posts">Top Movies</a>
+                    </li>
+                    <li>
+                        <a id="btn-user" href="#/posts">Posts</a>
+                    </li>
+                    <li>
+                        <a href="#/users">Users</a>
+                    </li>
+                    <li>
+                        <a href="#/profile">Profile</a>
+                    </li>
+                    <li>
+                        <a id="btn-signup" class="glyphicon glyphicon-plus-sign " href="#/register"> Register</a>
+                    </li>
+                    <li>
+                        <a id="btn-login" class=" glyphicon glyphicon-log-in" href="#/login"> Log In</a>
+                    </li>
+                    <li>
+                        <a id="btn-logout" class=" glyphicon glyphicon-log-out hidden" href="#/logout"> Log Out</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
-  <div class="container">
-    <div id="most-rated" class="row">
-      <!--  Posts Template-->
-    </div>
-  </div>
-
-  <div class="middle-section container">
-    <div id="wrapper" class="row">
-      <!-- Here comes templates-->
-
-      <!--  Posts Template  -->
-    </div>
-    <!-- END of Posts Template-->
-  </div>
-
-  <div class="container">
-    <div id="most-recent" class="row">
-
-    </div>
-  </div>
-
-
-  <!-- Footer -->
-  <footer>
     <div class="container">
+        <div id="most-rated" class="row">
+            <!--  Posts Template-->
+        </div>
     </div>
-  </footer>
+
+    <div class="middle-section container">
+        <div id="wrapper" class="row">
+            <!-- Here comes templates-->
+
+            <!--  Posts Template  -->
+        </div>
+        <!-- END of Posts Template-->
+    </div>
+
+    <div class="container">
+        <div id="most-recent" class="row">
+
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+        </div>
+    </footer>
 </body>
+
 </html>
