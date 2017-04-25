@@ -5,14 +5,14 @@ import Handlebars from 'handlebars';
 function loadTemplate(templateName) {
     let templateUrl = `./templates/${templateName}.html`;
 
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
         $.ajax({
             url: templateUrl,
-            success: function (data) {
+            success: function(data) {
                 let template = Handlebars.compile(data);
                 resolve(template);
             },
-            error: function (err) {
+            error: function(err) {
                 reject(err);
             }
         });
@@ -28,8 +28,8 @@ class TemplatesLoader {
 var templatesLoader = new TemplatesLoader();
 
 loadTemplate('facebookShare').then(function(template) {
-  Handlebars.registerPartial('facebookShare', template);
+    Handlebars.registerPartial('facebookShare', template);
 });
 
 
-export {templatesLoader};
+export { templatesLoader };

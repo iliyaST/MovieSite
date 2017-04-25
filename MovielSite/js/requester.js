@@ -21,7 +21,7 @@ function request(url, type, body) {
 //         success: resolve,
 //         error: reject
 //     }));
-
+//
 //     return promise;
 // }
 
