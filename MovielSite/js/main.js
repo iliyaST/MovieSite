@@ -1,8 +1,10 @@
-import { Datas } from "./data.js";
+import { DataTransferManager } from "./data.js";
 import { MainController } from "./mainController.js";
+import { ClosestCinema } from "./getClosestCinema.js";
 
 // Testing...
-let data = new Datas();
+let searchCinema = new ClosestCinema();
+let data = new DataTransferManager();
 let controller = new MainController(data);
 
 let result = controller.getNewestMovies();
@@ -12,6 +14,8 @@ let resultByActor = controller.getMoviesByActor("Julia Roberts");
 let resultByRating = controller.getMoviesByRating(8);
 let resultByActor1 = controller.getMoviesByActor("Julia Roberts");
 let resultByGenre = controller.getMoviesByGenre("fantasy");
+
+searchCinema.fIndClosestCinema();
 
 console.log("newest:")
 console.log(result);

@@ -1,6 +1,6 @@
 import * as requester from './requester.js';
 
-class Datas {
+class DataTransferManager {
     constructor() {
         this.keyWordsToSearch = ["hero", "last", "ball", "sport", "flower", "thor", "superman", "justice",
             "the", "one", "two", "now", "you", "see", "kill", "die", "reborn", "regeneration", "degeneration", "power", "air",
@@ -134,4 +134,4 @@ class Datas {
     }
 }
 
-export { Datas };
+export { DataTransferManager };
