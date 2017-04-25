@@ -10,18 +10,20 @@ function request(url, type, body) {
     return promise;
 }
 
-// Headers and content Type isnt allowed on omdb....So u can just create another function like that to use on SQL
-function requestSQL(url, type, body) {
-    const promise = new Promise((resolve, reject) => $.ajax({
-        url,
-        type,
-        data: body,
-        success: resolve,
-        error: reject
-    }));
+// Headers and content Type isnt allowed on omdb....So u can just use the function requestSQL 
+// TODO: uncomment:?
 
-    return promise;
-}
+// function requestSQL(url, type, body, headers) {
+//     const promise = new Promise((resolve, reject) => $.ajax({
+//         url,
+//         type,
+//         data: body,
+//         success: resolve,
+//         error: reject
+//     }));
+
+//     return promise;
+// }
 
 export function get(url) {
     return request(url, 'GET', '');
