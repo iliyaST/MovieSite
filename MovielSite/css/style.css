@@ -1,5 +1,6 @@
 body {
     background-color: #d9d9d9;
+    overflow: hidden;
 }
 
 nav {
@@ -68,8 +69,36 @@ div#bs-example-navbar-collapse-1.collapse.navbar-collapse {
     color: #fff;
 }
 
+#main {
+    position: absolute;
+    top: 5%;
+    height: 85%;
+    width: 100%;
+    background-color: #6BAE00
+}
+
+#content-container {
+    margin-left: 3%;
+    width: 94%;
+    height: 100%;
+}
+
+#inner-site {
+    width: 100%;
+    height: 100%;
+}
+
+#footer {
+    position: absolute;
+    top: 87%;
+    width: 100%;
+    height: 18%;
+    background-color: black;
+}
+
 #wrapper {
-    padding: 30px 0px;
+    width: 99%;
+    height: 99%;
 }
 
 *[role="form"] {
