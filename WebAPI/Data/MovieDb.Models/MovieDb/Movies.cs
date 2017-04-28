@@ -13,9 +13,9 @@ namespace MovieDb.Models
             Dislikes = 0;
             this.comments = new HashSet<Comments>();
         }
-        [Required]
         public int Id { get; set; }
         [Required]
+        [MaxLength(100)]
         public string Name { get; set; }
         [Required]
         public string ImdbID { get; set; }
