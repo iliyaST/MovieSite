@@ -84,7 +84,14 @@ div#bs-example-navbar-collapse-1.collapse.navbar-collapse {
 }
 
 #inner-site {
-    width: 100%;
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+#right-site {
+    float: right;
+    width: 50%;
     height: 100%;
 }
 

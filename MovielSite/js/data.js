@@ -69,6 +69,21 @@ class DataTransferManager {
         return resultMovies;
     }
 
+    getUpcomingMovies() {
+        let resultMovies = [];
+
+        this.keyWordsToSearch.forEach(keyWord => {
+            var currentRequestURL = `http://www.omdbapi.com/?t=${keyWord}&y=2018&type=movie`;
+
+            requester.get(currentRequestURL)
+                .then(result => {
+                    resultMovies.push(result);
+                });
+        });
+
+        return resultMovies;
+    }
+
     getMoviesByRating(rating) {
         let resultMovies = [];
 

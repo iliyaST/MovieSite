@@ -65,6 +65,15 @@ class MainController {
         return this.cache.getMoviesByGenre[genre];
     }
 
+    getUpcomingMovies() {
+        if (!this.cache.getUpcomingMovies) {
+            let result = this.data.getUpcomingMovies();
+            this.cache.getUpcomingMovies = result;
+        }
+
+        return this.cache.getUpcomingMovies;
+    }
+
     clearCache() {
         this.cache = {
             getMoviesByActor: {},
