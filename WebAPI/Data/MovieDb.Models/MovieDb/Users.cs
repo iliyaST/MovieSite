@@ -14,16 +14,20 @@ namespace MovieDb.Models
         }
         public int UsersId { get; set; }
         [Required]
+        [MaxLength(100)]
         public string FirstName { get; set; }
         [Required]
+        [MaxLength(100)]
         public string LastName { get; set; }
-
+        [MaxLength(100)]
         public string Email { get; set; }
-
+        [MaxLength(50)]
         public string City { get; set; }
         [Required]
+        [MaxLength(100)]
         public string UserName { get; set; }
         [Required]
+        [MaxLength(100)]
         public string Password { get; set; }
 
         public virtual ICollection<Comments> Comments
