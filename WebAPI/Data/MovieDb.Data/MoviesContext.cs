@@ -4,7 +4,8 @@
     using System.Data.Entity;
     public class MoviesContext : DbContext
     {
-        public MoviesContext():base("MovieDbConnection")
+        public MoviesContext()
+            :base("MovieDbConnection")
         {
 
         }

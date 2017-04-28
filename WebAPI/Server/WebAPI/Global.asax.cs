@@ -7,6 +7,7 @@
     {
         protected void Application_Start()
         {
+            DbConfig.Initiliaze();
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }
