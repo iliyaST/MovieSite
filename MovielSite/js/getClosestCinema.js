@@ -42,32 +42,32 @@ class ClosestCinema {
 
             let arenaSofiaWest = {
                 name: "ArenaSofiaWest",
-                lat: 42.7050372,
-                long: 23.2877732
+                lat: 42.7050411,
+                long: 23.2877785
             };
 
             let bulgariaMall = {
                 name: "BulgariaMall",
-                lat: 42.6760466,
-                long: 23.2864641
+                lat: 42.6643515,
+                long: 23.2868163
             };
 
             let arenaMladost = {
                 name: "ArenaMladost",
-                lat: 42.6241892,
-                long: 23.374204
+                lat: 42.6241931,
+                long: 23.3742093
             };
 
             let paradiseCenter = {
                 name: "ParadiseCenter",
-                lat: 42.6566932,
-                long: 23.3188958
+                lat: 42.65862,
+                long: 23.3136756
             };
 
             let theMall = {
                 name: "TheMall",
-                lat: 42.656041,
-                long: 23.3603534
+                lat: 42.6610185,
+                long: 23.3806639
             };
 
             let cinemas = [];
@@ -81,16 +81,16 @@ class ClosestCinema {
         // {lat:42.6566932,long:23.3188958}
         // {lat:42.6760466,long:23.2864641}
 
-        var myPromise = new Promise((resolve, reject) => {
+        let myPromise = new Promise((resolve, reject) => {
             navigator.geolocation.getCurrentPosition((pos) => {
-                resolve({ lat: 42.6290682, long: 23.376007 });
+                resolve(pos);
             })
         });
 
         function calculateDistance(firstLocation, secondLocation) {
             let latDif = (secondLocation.lat - firstLocation.lat);
             let longDif = (secondLocation.long - firstLocation.long);
-            let distance = (Math.sqrt(latDif * latDif) + (longDif * latDif));
+            let distance = Math.sqrt((latDif * latDif) + (longDif * longDif));
             return distance;
         }
 
@@ -120,6 +120,7 @@ class ClosestCinema {
         }
 
         myPromise
+            .then(parseLocation)
             .then(currentLocation => {
                 this.closestLocation = getClosestCinema(currentLocation);
                 return this.closestLocation;

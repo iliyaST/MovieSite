@@ -6,7 +6,6 @@ SystemJS.config({
         'systemjs-babel-build': './node_modules/systemjs-plugin-babel/systemjs-babel-browser.js',
 
         // App files
-        'app': 'js/app.js',
         'myRouter': 'js/router.js',
         //    'requester': 'js/requester.js',
         'data': 'js/data.js',
