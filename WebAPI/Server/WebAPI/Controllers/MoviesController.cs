@@ -15,12 +15,11 @@ namespace WebAPI.Controllers
         private readonly IRepository<Likes> likes;
         private readonly IRepository<Dislikes> dislikes;
 
-        public MoviesController()
+        public MoviesController(IRepository<Movies> movies,IRepository<Likes> likes,IRepository<Dislikes> dislikes)
         {
-            var context = new MoviesContext();
-            this.movies = new EfGenericRepository<Movies>(context);
-            this.likes = new EfGenericRepository<Likes>(context);
-            this.dislikes = new EfGenericRepository<Dislikes>(context);
+            this.movies = movies;
+            this.likes = likes;
+            this.dislikes = dislikes;
         }
         public IHttpActionResult GetAll()
         {

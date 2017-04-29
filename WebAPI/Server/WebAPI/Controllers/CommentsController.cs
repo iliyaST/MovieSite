@@ -17,12 +17,11 @@ namespace WebAPI.Controllers
         private readonly IRepository<Comments> comments;
         private readonly IRepository<Users> users;
         private readonly IRepository<Movies> movies;
-        public CommentsController()
+        public CommentsController(IRepository<Comments> comments,IRepository<Users> users,IRepository<Movies> movies)
         {
-            var context = new MoviesContext();
-            this.comments = new EfGenericRepository<Comments>(context);
-            this.users = new EfGenericRepository<Users>(context);
-            this.movies = new EfGenericRepository<Movies>(context);
+            this.comments = comments;
+            this.users = users;
+            this.movies = movies;
         }
         public IHttpActionResult CreateComment(int userId,string imdbId,string text)
         {

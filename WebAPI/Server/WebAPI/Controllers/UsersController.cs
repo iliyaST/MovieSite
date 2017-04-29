@@ -12,9 +12,9 @@
     {
         private readonly IRepository<Users> users;
 
-        public UsersController()
+        public UsersController(IRepository<Users> users)
         {
-            this.users = new EfGenericRepository<Users>(new MoviesContext());
+            this.users = users;
         }
         [HttpPost]
         public IHttpActionResult Register(Users user)

@@ -2,7 +2,7 @@
 {
     using MovieDb.Models;
     using System.Data.Entity;
-    public class MoviesContext : DbContext
+    public class MoviesContext : DbContext, IMoviesContext
     {
         public MoviesContext()
             :base("MovieDbConnection")
