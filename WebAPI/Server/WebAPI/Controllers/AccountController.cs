@@ -19,9 +19,10 @@
     using WebAPI.Providers;
     using WebAPI.Results;
     using MovieDb.Models;
-
+    using System.Web.Http.Cors;
     [Authorize]
     [RoutePrefix("api/Account")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";

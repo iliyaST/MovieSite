@@ -53,6 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MovieDb\Comments.cs" />
+    <Compile Include="MovieDb\Dislikes.cs" />
+    <Compile Include="MovieDb\Likes.cs" />
     <Compile Include="MovieDb\Movies.cs" />
     <Compile Include="ApiUsersDB\MovieDBApiUsers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

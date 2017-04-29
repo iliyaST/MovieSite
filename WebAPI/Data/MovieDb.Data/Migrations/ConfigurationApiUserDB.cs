@@ -10,6 +10,7 @@ namespace MovieDb.Data.Migrations
         public ConfigurationApiUserDB()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(MovieDb.Data.MovieDbAPIContext context)

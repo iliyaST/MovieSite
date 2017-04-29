@@ -52,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EfGenericRepository.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="Migrations\ConfigurationApiUserDB.cs" />
     <Compile Include="Migrations\ConfigurationMovieDB.cs" />
     <Compile Include="MovieDbAPIContext.cs" />
