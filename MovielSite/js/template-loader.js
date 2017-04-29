@@ -1,35 +1,28 @@
 /*jshint esversion: 6 */
 
-import Handlebars from 'handlebars';
-
-function loadTemplate(templateName) {
-    let templateUrl = `./templates/${templateName}.html`;
-
-    return new Promise(function(resolve, reject) {
-        $.ajax({
-            url: templateUrl,
-            success: function(data) {
-                let template = Handlebars.compile(data);
-                resolve(template);
-            },
-            error: function(err) {
-                reject(err);
-            }
-        });
-    });
-}
+import { Handlebars } from './handlebars.js';
 
 class TemplatesLoader {
-    load(templateName) {
-        return loadTemplate(templateName);
+
+    constructor() {
+        this.templatesCache = {};
+    }
+
+    get(templateName) {
+        return new Promise((resolve, reject) => {
+            if (this.templatesCache[templateName]) {
+                resolve(Handlebars.compile(this.templatesCache[templateName]));
+            }
+
+            $.get(`./templates/${templateName}.html`, template => {
+                this.templatesCache[templateName] = template;
+                resolve(Handlebars.compile(template));
+            })
+        })
     }
 }
 
-var templatesLoader = new TemplatesLoader();
-
-loadTemplate('facebookShare').then(function(template) {
-    Handlebars.registerPartial('facebookShare', template);
-});
+let templatesLoader = new TemplatesLoader();
 
 
 export { templatesLoader };
