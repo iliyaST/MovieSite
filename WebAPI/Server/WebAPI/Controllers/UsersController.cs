@@ -41,6 +41,7 @@
             return this.Ok(this.users.All().Where(x => x.UserName == user.UserName).FirstOrDefault().UsersId);
         }
         [HttpGet]
+        [AllowAnonymous]
         public IHttpActionResult Get()
         {
             var res= this.users.All().Where( x=>x.Expire == false).OrderBy(x => x.LastName).ThenBy(x => x.FirstName).Select(x=>new { x.FirstName,x.LastName,x.UserName,x.UsersId,x.isMale,x.City,x.Email} ).ToList();
