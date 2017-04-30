@@ -6,21 +6,20 @@ SystemJS.config({
         'systemjs-babel-build': './node_modules/systemjs-plugin-babel/systemjs-babel-browser.js',
 
         // App files
-        'myRouter': 'js/router.js',
+        'main': 'js/main.js',
+        'router': 'js/router.js',
         'requester': 'js/requester.js',
         'data': 'js/data.js',
-        'userControler': './controlers/userControler.js',
-        'templatesLoader': "./template-loader.js",
+        'userControler': 'js/controlers/userControler.js',
+        'templatesLoader': "js/template-loader.js",
+        "DataTransferManager": 'js/DataTransferManager.js',
         //    'homeController': 'js/controllers/home.js',
         //    'myCookieController': 'js/controllers/myCookie.js',
         //    'userController': 'js/controllers/user.js',
         //    'templates': 'js/templates.js',
 
         // Library files
-        'handlebars': '/handlebars.js',
-        'main': '/main.js',
-        'jquery': './node_modules/jquery/dist/jquery.min.js'
-
-
+        'handlebars': 'js/handlebars.js',
+        'jquery': 'js/node_modules/jquery/dist/jquery.min.js'
     }
 });

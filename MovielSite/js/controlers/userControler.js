@@ -1,5 +1,5 @@
 import * as data from 'data';
-import * as templatesLoader from 'templatesLoader';
+import { templatesLoader } from 'templatesLoader';
 
 const $contentDiv = $('#content-container');
 
@@ -10,13 +10,25 @@ export function register() {
     templatesLoader.get('register')
         .then(template => {
             $contentDiv.html(template());
-        })
+        });
 }
 
 export function tryToRegister() {
-    const username = $('#input-username').val();
-    const password = $('#input-password').val();
+    const username = $('#username').val();
+    const password = $('#password').val();
     const passHash = password; // HASH ME
+    const firstName = $('#firstName').val();
+    const familyName = $('#familyName').val();
+    const email = $('#email').val();
+    const city = $('#city').val();
+
+    var user = new {
+        username,
+        passHash,
+        firstName,
+        familyName,
+        email
+    }
 
     data.register(username, passHash)
         .then(
@@ -26,38 +38,38 @@ export function tryToRegister() {
             },
             errorMsg => toastr.error(errorMsg));
 }
-export function get(params) {
-    const { category } = params;
+// export function get(params) {
+//     const { category } = params;
 
-    loadTemplate('auth')
-        .then(template => {
-            $appContainer.html(template());
-        });
-}
+//     loadTemplate('auth')
+//         .then(template => {
+//             $appContainer.html(template());
+//         });
+// }
 
-export function login() {
-    const username = $('#input-username').val();
-    const password = $('#input-password').val();
-    const passHash = password; // HASH ME
+// export function login() {
+//     const username = $('#input-username').val();
+//     const password = $('#input-password').val();
+//     const passHash = password; // HASH ME
 
-    data.login(username, passHash)
-        .then(
-            result => {
-                localStorage.setItem(LOCALSTORAGE_AUTH_KEY_NAME, result.result.authKey);
-                $('#auth-btn').addClass('hidden');
-                $('#signout-btn').removeClass('hidden');
-                toastr.success(`Hi, ${username}`);
-                location.href = '#/home';
-            },
-            errorMsg => toastr.error(errorMsg));
-}
+//     data.login(username, passHash)
+//         .then(
+//             result => {
+//                 localStorage.setItem(LOCALSTORAGE_AUTH_KEY_NAME, result.result.authKey);
+//                 $('#auth-btn').addClass('hidden');
+//                 $('#signout-btn').removeClass('hidden');
+//                 toastr.success(`Hi, ${username}`);
+//                 location.href = '#/home';
+//             },
+//             errorMsg => toastr.error(errorMsg));
+// }
 
 
 
-export function logout() {
-    localStorage.removeItem(LOCALSTORAGE_AUTH_KEY_NAME);
-    $('#auth-btn').removeClass('hidden');
-    $('#signout-btn').addClass('hidden');
-    //toastr.success('Logged out');
-    location.href = '#/home';
-}
+// export function logout() {
+//     localStorage.removeItem(LOCALSTORAGE_AUTH_KEY_NAME);
+//     $('#auth-btn').removeClass('hidden');
+//     $('#signout-btn').addClass('hidden');
+//     //toastr.success('Logged out');
+//     location.href = '#/home';
+// }

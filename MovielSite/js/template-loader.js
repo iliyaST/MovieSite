@@ -17,8 +17,8 @@ class TemplatesLoader {
             $.get(`./templates/${templateName}.html`, template => {
                 this.templatesCache[templateName] = template;
                 resolve(Handlebars.compile(template));
-            })
-        })
+            });
+        });
     }
 }
 

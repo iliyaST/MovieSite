@@ -7,18 +7,15 @@
 
 
     <!-- Bootstrap Core CSS -->
-    <link href="./libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="css/style.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
     <!-- jQuery -->
     <script src="./libs/jquery/jquery.min.js"></script>
-
-    <script src="./node_modules/navigo/lib/navigo.js"></script>
-
-
     <script src="./node_modules/systemjs/dist/system.js"></script>
     <script src="./js/system-config.js"></script>
+    <link href="./bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script>
         System.import('main');
     </script>
@@ -31,7 +28,7 @@
             <div class="container-fluid">
 
                 <div class="navbar-header">
-                    <span class="navbar-brand">Movie Site</span>
+                    <span class="navbar-brand customFont">Movie Site</span>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -76,7 +73,7 @@
             <div id="content-container">
                 <iframe id="inner-site" src="" frameborder="0"></iframe>
                 <div id="contacts">
-                    <span id="location">Our location on map</span>
+                    <span id="location" class="customFont">Our location on map</span>
                 </div>
                 <iframe id="right-site" src="" frameborder="0"></iframe>
             </div>
