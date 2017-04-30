@@ -17,6 +17,7 @@
             this.users = users;
         }
         [HttpPost]
+        [AllowAnonymous]
         public IHttpActionResult Register(Users user)
         {
             var allUsersQuearable = this.users.All();
@@ -59,7 +60,7 @@
             return this.Ok(new {res.FirstName,res.LastName,res.UserName,res.UsersId,res.isMale,res.City,res.Email });
 
         }
-
+        [AllowAnonymous]
         public IHttpActionResult LogIn(LoginUserModel userData)
         {
             var currentUser=this.users.All().Where(x => x.UserName == userData.UserName).FirstOrDefault();
