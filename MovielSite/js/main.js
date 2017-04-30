@@ -1,7 +1,6 @@
 /*jshint esversion: 6 */
 import { MyRouter } from 'router';
-import { DataTransferManager } from "DataTransferManager";
-import { MainController } from "./mainController.js";
+import { DataTransferManager } from "dataTransferManager";
 import { ClosestCinema } from "./getClosestCinema.js";
 import { templatesLoader } from "templatesLoader";
 import * as userControler from 'userControler';
@@ -15,12 +14,11 @@ let data = new DataTransferManager();
 let controller = new MainController(data);
 
 
-router.on('register', userControler.register);
+router.on('register', userControler.register)
+    .on('watch', openNearestCinema);
+
 // .on('login', userController.login)
 // .on('about', controller.showAbout)
-
-
-
 // .on('logout', userController.logout)
 // .on('user-panel', controller.showUserPanel)
 // .on('posts/:id', (params) => controller.showPostByID(params))
@@ -29,13 +27,7 @@ router.on('register', userControler.register);
 // .on('home', function() {
 //     $contentDiv.text('');
 // })
-// .on('watch', function() {
-//     $contentDiv.html('<iframe id="inner-site" src="" frameborder="0"></iframe>' +
-//         '<div id="contacts"><span id="location">Our location on map</span></div>' +
-//         '<iframe id="right-site" src="" frameborder="0"></iframe>');
-//     let searchCinema = new ClosestCinema();
-//     searchCinema.fIndClosestCinema();
-// })
+// 
 // .on('login', function() {
 //     templatesLoader.get('login')
 //         .then(template => {
