@@ -96,10 +96,6 @@ find-movie-container {
     width: 100%;
 }
 
-.row {
-    padding-top: 20%;
-}
-
 #right-site {
     position: absolute;
     left: 50%;
@@ -320,6 +316,22 @@ footer ul li:hover .fa {
     color: #fff;
 }
 
-.clickedNavBar {
-    background-color: #
+#registerForm {
+    margin-top: 100px;
+    height: 100%;
+    width: 100%;
+}
+
+#registerPicture img {
+    margin-top: 20%;
+    width: 100%;
+    height: 100%;
+}
+
+#registerContainer {
+    background-color: white;
+}
+
+#btn-reg {
+    margin-bottom: 500px;
 }

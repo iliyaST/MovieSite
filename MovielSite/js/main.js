@@ -4,6 +4,7 @@ import { DataTransferManager } from "./data.js";
 import { MainController } from "./mainController.js";
 import { ClosestCinema } from "./getClosestCinema.js";
 import { templatesLoader } from "./template-loader.js";
+import * as userControler from 'userControler';
 // import * as homeController from 'homeController';
 // import * as myCookieController from 'myCookieController';
 // import * as userController from 'userController';
@@ -19,12 +20,12 @@ let $contentDiv = $('#content-container');
 router
 // .on('login', userController.login)
 // .on('about', controller.showAbout)
-// .on('register', userController.register)
-// .on('logout', userController.logout)
-// .on('user-panel', controller.showUserPanel)
-// .on('posts/:id', (params) => controller.showPostByID(params))
-// .on('posts', (params) => controller.postWorking(params))
-// .on('user/:userID', (params) => controller.showUserPosts(params))
+    .on('register', userControler.register)
+    // .on('logout', userController.logout)
+    // .on('user-panel', controller.showUserPanel)
+    // .on('posts/:id', (params) => controller.showPostByID(params))
+    // .on('posts', (params) => controller.postWorking(params))
+    // .on('user/:userID', (params) => controller.showUserPosts(params))
     .on('home', function() {
         $contentDiv.text('');
     })
