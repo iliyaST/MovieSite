@@ -14,6 +14,7 @@ SystemJS.config({
         'templatesLoader': "js/template-loader.js",
         "dataTransferManager": 'js/DataTransferManager.js',
         'closestCinema': 'js/ClosestCinema.js',
+        'watchControler': 'js/controlers/watchControler.js',
         //    'homeController': 'js/controllers/home.js',
         //    'myCookieController': 'js/controllers/myCookie.js',
         //    'userController': 'js/controllers/user.js',

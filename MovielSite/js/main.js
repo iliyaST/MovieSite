@@ -1,9 +1,9 @@
 /*jshint esversion: 6 */
 import { MyRouter } from 'router';
 import { DataTransferManager } from "dataTransferManager";
-import { ClosestCinema } from "./getClosestCinema.js";
 import { templatesLoader } from "templatesLoader";
 import * as userControler from 'userControler';
+import { openNearestCinema } from 'watchControler';
 // import * as homeController from 'homeController';
 // import * as myCookieController from 'myCookieController';
 // import * as userController from 'userController';
@@ -11,7 +11,7 @@ import * as userControler from 'userControler';
 // istances
 let router = new MyRouter();
 let data = new DataTransferManager();
-let controller = new MainController(data);
+// let controller = new MainController(data);
 
 
 router.on('register', userControler.register)
