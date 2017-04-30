@@ -27,15 +27,22 @@
                 return this.BadRequest("Username is taken");
             }
 
-            this.users.Add(user);
-            this.users.SaveChanges();
-            
+            try
+            {
+                this.users.Add(user);
+                this.users.SaveChanges();
+            }
+            catch
+            {
+                this.BadRequest("some argument for registration is not ok");
+            }
+        
             return this.Ok(this.users.All().Where(x => x.UserName == user.UserName).FirstOrDefault().UsersId);
         }
         [HttpGet]
         public IHttpActionResult Get()
         {
-            var res= this.users.All().Where( x=>x.Expire == false).OrderBy(x => x.LastName).ThenBy(x => x.FirstName).Take(10).ToList();
+            var res= this.users.All().Where( x=>x.Expire == false).OrderBy(x => x.LastName).ThenBy(x => x.FirstName).Select(x=>new { x.FirstName,x.LastName,x.UserName,x.UsersId,x.isMale,x.City,x.Email} ).ToList();
             return this.Ok(res);
 
         }
@@ -44,11 +51,12 @@
         {
             if (id<0)
             {
-                return this.BadRequest("Id of user can`t be null or empty");
+                return this.BadRequest("Id of user can`t be negative");
             }
 
             var res = GetUser(id);
-            return this.Ok(res);
+
+            return this.Ok(new {res.FirstName,res.LastName,res.UserName,res.UsersId,res.isMale,res.City,res.Email });
 
         }
 

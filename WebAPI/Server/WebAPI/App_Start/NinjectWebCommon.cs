@@ -11,7 +11,6 @@ namespace WebAPI.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using MovieDb.Data;
-    using Ninject.Extensions.Conventions;
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -62,7 +61,11 @@ namespace WebAPI.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IMoviesContext>().To<MoviesContext>().InRequestScope();
+            kernel
+                .Bind<IMoviesContext>()
+                .To<MoviesContext>()
+                .InRequestScope();
+
             kernel.Bind(typeof(IRepository<>)).To(typeof(EfGenericRepository<>));
         }        
     }

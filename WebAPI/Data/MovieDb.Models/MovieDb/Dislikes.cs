@@ -6,8 +6,8 @@ namespace MovieDb.Models
     {
         public int Id { get; set; }
         [Required]
-        public virtual int UserId { get; set; }
+        public virtual int UsersId { get; set; }
         [Required]
-        public virtual int MovieId { get; set; }
+        public virtual int MoviesId { get; set; }
     }
 }

@@ -22,10 +22,10 @@
         public bool isDeleted { get; set; }
 
         [Required]
-        public virtual Users User { get; set; }
+        public virtual int UsersId { get; set; }
 
         [Required]
-        public virtual Movies Movie { get; set; }
+        public virtual int MoviesId { get; set; }
 
     }
 }

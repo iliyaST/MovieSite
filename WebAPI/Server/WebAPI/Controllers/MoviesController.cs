@@ -64,8 +64,10 @@ namespace WebAPI.Controllers
 
         }
 
-        public IHttpActionResult LikeAMovie(string movieImdbid, int userId)
+        public IHttpActionResult LikeAMovie(LikeAMovieModel model)
         {
+            string movieImdbid = model.ImdbID;
+            int userId = model.Userid;
             var currentMovie = this.movies.All().Where(x => x.ImdbID == movieImdbid).FirstOrDefault();
             if (currentMovie == null)
             {
@@ -75,9 +77,17 @@ namespace WebAPI.Controllers
 
             try
             {
-                LikeOrDislikeAMovie(true, userId, currentMovie);
-                this.movies.Update(currentMovie);
-                this.movies.SaveChanges();
+                var isSucces=LikeOrDislikeAMovie(true, userId, currentMovie);
+                if (isSucces)
+                {
+                    this.movies.Update(currentMovie);
+                    this.movies.SaveChanges();
+                }
+                else
+                {
+                    return this.BadRequest("already liked or disliked");
+                }
+               
 
             }
             catch
@@ -87,8 +97,10 @@ namespace WebAPI.Controllers
             return this.Ok();
         }
 
-        public IHttpActionResult DislikeAMovie(string movieImdbid, int userId)
+        public IHttpActionResult DislikeAMovie(LikeAMovieModel model)
         {
+            string movieImdbid = model.ImdbID;
+            int userId = model.Userid;
             var currentMovie = this.movies.All().Where(x => x.ImdbID == movieImdbid).FirstOrDefault();
             if (currentMovie == null)
             {
@@ -97,10 +109,16 @@ namespace WebAPI.Controllers
             currentMovie.DislikesNumber = currentMovie.DislikesNumber + 1;
             try
             {
-                LikeOrDislikeAMovie(false, userId, currentMovie);
-                this.movies.Update(currentMovie);
-                this.movies.SaveChanges();
-
+                var isSucces = LikeOrDislikeAMovie(false, userId, currentMovie);
+                if (isSucces)
+                {
+                    this.movies.Update(currentMovie);
+                    this.movies.SaveChanges();
+                }
+                else
+                {
+                    return this.BadRequest("already liked or disliked");
+                }
             }
             catch
             {
@@ -108,33 +126,33 @@ namespace WebAPI.Controllers
             }
             return this.Ok();
         }
-
-        public IHttpActionResult GetTopLikedMovies(int number)
+        
+        [HttpGet]
+        public IHttpActionResult GetTopLikedMovies(int id)
         {
-            var res = this.movies.All().OrderByDescending(x => x.Likes).Take(number).ToList();
+            int number = id;
+            var res = this.movies.All().OrderByDescending(x => x.LikesNumber).Take(number).ToList();
+            return this.Ok(res.Select(x => x.ImdbID));
+        }
+        [HttpGet]
+        public IHttpActionResult GetTopDisLikedMovies(int id)
+        {
+            int number = id;
+            var res = this.movies.All().OrderByDescending(x => x.DislikesNumber).Take(number).ToList();
             return this.Ok(res.Select(x => x.ImdbID));
         }
 
-        public IHttpActionResult GetTopDisLikedMovies(int number)
-        {
-            var res = this.movies.All().OrderByDescending(x => x.Dislikes).Take(number).ToList();
-            return this.Ok(res.Select(x => x.ImdbID));
-        }
 
-
-        private bool isAlreadyLikedOrDislikedAMovie(int userId, Movies movie, bool isLike)
+        private bool isAlreadyLikedOrDislikedAMovie(int userId, Movies movie)
         {
-            dynamic isliked = null;
-            if (isLike)
+            dynamic islikedOrDisliked = this.likes.All().Where(x => x.MoviesId == movie.Id && x.UsersId == userId).FirstOrDefault();
+
+            if (islikedOrDisliked == null)
             {
-                isliked = this.likes.All().Where(x => x.MovieId == movie.Id && x.UserId == userId).FirstOrDefault();
-            }
-            else
-            {
-                isliked = this.dislikes.All().Where(x => x.MovieId == movie.Id && x.UserId == userId).FirstOrDefault();
+                islikedOrDisliked = this.dislikes.All().Where(x => x.MoviesId == movie.Id && x.UsersId == userId).FirstOrDefault();
             }
 
-            if (isliked != null)
+            if (islikedOrDisliked != null)
             {
                 return true;
             }
@@ -144,22 +162,26 @@ namespace WebAPI.Controllers
             }
         }
 
-        private void LikeOrDislikeAMovie(bool isLike, int userId, Movies movie)
+        private bool LikeOrDislikeAMovie(bool isLike, int userId, Movies movie)
         {
             if (isLike)
             {
-                if (!isAlreadyLikedOrDislikedAMovie(userId, movie, true))
+                if (!isAlreadyLikedOrDislikedAMovie(userId, movie))
                 {
-                    this.likes.Add(new Likes { UserId = userId, MovieId = movie.Id });
+                    this.likes.Add(new Likes { UsersId = userId, MoviesId = movie.Id });
+                    return true;
                 }
             }
             else
             {
-                if (!isAlreadyLikedOrDislikedAMovie(userId, movie, false))
+                if (!isAlreadyLikedOrDislikedAMovie(userId, movie))
                 {
-                    this.dislikes.Add(new Dislikes { UserId = userId, MovieId = movie.Id });
+                    this.dislikes.Add(new Dislikes { UsersId = userId, MoviesId = movie.Id });
+                    return true;
                 }
             }
+
+            return false;
 
         }
 
