@@ -16,8 +16,8 @@ let data = new DataTransferManager();
 
 router.on('register', userControler.register)
     .on('watch', openNearestCinema)
-    .on('users', userControler.getAll);
-// .on('login', userController.login)
+    .on('users', userControler.getAll)
+    .on('login', userControler.login);
 // .on('about', controller.showAbout)
 // .on('logout', userController.logout)
 // .on('user-panel', controller.showUserPanel)

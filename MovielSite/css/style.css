@@ -153,6 +153,19 @@ li {
     color: #fff;
 }
 
+#login-row {
+    margin-top: 10%;
+}
+
+#login-container {
+    background-image: url("../img/39134046-futuristic-min.jpg");
+    margin-left: -20%;
+    margin-right: 0;
+    width: 140%;
+    height: 100%;
+    padding-right: 10%;
+}
+
 #navbar {
     border: 0;
     height: 50px !important;
@@ -202,6 +215,10 @@ li {
     font-size: 30px;
     height: 50px;
     width: 50px;
+}
+
+#login-form {
+    border-radius: 20px;
 }
 
 #socialMediaIcons ul li :first-child {
