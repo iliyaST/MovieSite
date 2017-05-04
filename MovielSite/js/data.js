@@ -15,8 +15,8 @@ export function register(user) {
 
     var reqUser = {
         username: user.username,
-        password: CryptoJS.SHA1(user.username + user.password).toString(),
-        confirmpassword: CryptoJS.SHA1(user.username + user.password).toString(),
+        password: user.password,
+        confirmpassword: user.password,
         email: user.email
     };
     var contentType = 'application/x-www-form-urlencoded';
@@ -29,7 +29,6 @@ export function register(user) {
 export function addMoviesUser(user) {
     var reqUser = {
         username: user.username,
-        password: CryptoJS.SHA1(user.username + user.password).toString(),
         email: user.email,
         firstname: user.firstname,
         lastname: user.lastname,
@@ -46,7 +45,7 @@ export function addMoviesUser(user) {
 export function signIn(user) {
     var reqUser = {
         username: user.username,
-        password: CryptoJS.SHA1(user.username + user.password).toString(),
+        password: user.password,
         grant_type: "password"
     };
 
@@ -54,7 +53,7 @@ export function signIn(user) {
 
     var body = transform(reqUser);
 
-    // var header = { "Access-Control-Allow-Origin": "*" };
+    var header = { "ContentType": "application/x-www-form-urlencoded" };
 
     return requester.postSql('token', {}, body, contentType)
         .then(function(resp) {

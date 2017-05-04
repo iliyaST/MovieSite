@@ -63,20 +63,20 @@
 
         }
         [AllowAnonymous]
-        public IHttpActionResult LogIn(LoginUserModel userData)
-        {
-            var currentUser=this.users.All().Where(x => x.UserName == userData.UserName).FirstOrDefault();
-            if (currentUser == null)
-            {
-                return this.BadRequest("No such Username");
-            }
-            if (currentUser.Password != userData.Password)
-            {
-                return this.BadRequest("Wrong Password");
-            }
+        //public IHttpActionResult LogIn(LoginUserModel userData)
+        //{
+        //    var currentUser=this.users.All().Where(x => x.UserName == userData.UserName).FirstOrDefault();
+        //    if (currentUser == null)
+        //    {
+        //        return this.BadRequest("No such Username");
+        //    }
+        //    if (currentUser.Password != userData.Password)
+        //    {
+        //        return this.BadRequest("Wrong Password");
+        //    }
 
-            return this.Ok(currentUser);
-        }
+        //    return this.Ok(currentUser);
+        //}
 
         public IHttpActionResult UpdateUserData(Users userData)
         {
@@ -85,7 +85,7 @@
             currentUser.Email = userData.Email;
             currentUser.FirstName = userData.FirstName;
             currentUser.LastName = userData.LastName;
-            currentUser.Password = userData.Password;
+            //currentUser.Password = userData.Password;
             currentUser.isMale = userData.isMale;
             try
             {

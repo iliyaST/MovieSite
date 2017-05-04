@@ -38,7 +38,7 @@ export function register() {
                         }
                     })
                     .catch(function(err) {
-                        toastr.error(JSON.stringify(err.message));
+                        toastr.error(JSON.stringify(err.responseText));
                     });
 
             });
