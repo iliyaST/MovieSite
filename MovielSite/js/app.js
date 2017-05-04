@@ -19,7 +19,7 @@ router
     .on('home', controller.home)
     .on(() => {
         router.navigate('/home');
-    })
+    });
 
 $(window).on('load', () => router.navigate());
 $(window).on('hashchange', () => router.navigate());
