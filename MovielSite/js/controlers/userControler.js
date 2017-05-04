@@ -15,6 +15,13 @@ export function register() {
         });
 }
 
+export function login() {
+    templatesLoader.get('login')
+        .then(template => {
+            $contentDiv.html(template());
+        });
+}
+
 // export function tryToRegister() {
 //     const username = $('#username').val();
 //     const password = $('#password').val();
