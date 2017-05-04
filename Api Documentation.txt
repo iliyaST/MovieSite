@@ -8,8 +8,9 @@ http://localhost:51443/token
 Post заявка
 
 heanders: x-form 
-body:
 grant_type:password
+
+body:
 username:vasil.kamburov2@abv.bg
 password:123456
 

@@ -3,10 +3,11 @@
     using Models.Users;
     using MovieDb.Data;
     using MovieDb.Models;
+    using System;
     using System.Linq;
     using System.Web.Http;
     using System.Web.Http.Cors;
-    
+
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UsersController : ApiController
     {
@@ -33,7 +34,7 @@
                 this.users.Add(user);
                 this.users.SaveChanges();
             }
-            catch
+            catch(Exception ex)
             {
                 this.BadRequest("some argument for registration is not ok");
             }

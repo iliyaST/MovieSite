@@ -1,3 +1,5 @@
+const URL_FOR_WEB_API = 'http://localhost:51443/';
+
 function request(url, type, body) {
     const promise = new Promise((resolve, reject) => $.ajax({
         url,
@@ -13,12 +15,12 @@ function request(url, type, body) {
 // Headers and content Type isnt allowed on omdb....So u can just use the function requestSQL 
 // TODO: uncomment:?
 
-function requestSql(url, type, headers, body) {
+function requestSql(url, type, headers, body, contentType) {
     const promise = new Promise((resolve, reject) => $.ajax({
         url,
         type,
         data: body,
-        contentType: "application/json",
+        contentType,
         headers,
         success: resolve,
         error: reject
@@ -60,13 +62,16 @@ export function put(url, body) {
 }
 
 export function getSql(url, headers) {
-    return requestSql(url, 'GET', headers);
+    return requestSql(URL_FOR_WEB_API + url, 'GET', headers);
 }
 
-export function postSql(url, headers, body) {
-    return requestSql(url, 'POST', headers, JSON.stringify(body));
+export function postSql(url, headers, body, contentType) {
+    return requestSql(URL_FOR_WEB_API + url, 'POST', headers, body, contentType);
+}
+export function postSqlStringify(url, headers, body, contentType) {
+    return requestSql(URL_FOR_WEB_API + url, 'POST', headers, JSON.stringify(body), contentType);
 }
 
 export function putSql(url, headers, body) {
-    return requestSql(url, 'PUT', headers, JSON.stringify(body));
+    return requestSql(URL_FOR_WEB_API + url, 'PUT', headers, JSON.stringify(body));
 }

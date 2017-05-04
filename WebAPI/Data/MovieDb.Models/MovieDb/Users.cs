@@ -24,6 +24,7 @@ namespace MovieDb.Models
         [Required]
         [MaxLength(100)]
         public string LastName { get; set; }
+        [Required]
         [MaxLength(100)]
         public string Email { get; set; }
         [MaxLength(50)]

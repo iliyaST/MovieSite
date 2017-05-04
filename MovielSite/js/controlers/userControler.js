@@ -12,6 +12,36 @@ export function register() {
     templatesLoader.get('register')
         .then(template => {
             $contentDiv.html(template());
+            $("#btn-reg").on("click", function() {
+                var user = {
+                    firstname: $("#firstName").val(),
+                    lastname: $("#familyName").val(),
+                    username: $("#username").val(),
+                    password: $("#inputPassword").val(),
+                    ismale: ($('input[name=gender]:checked').val() === 'true') ? true : false,
+                    email: $("#email").val()
+                };
+                data.register(user)
+                    .then(function(res) {
+                        console.log(res);
+                        if (!res) {
+                            data.addMoviesUser(user)
+                                .then(function(res) {
+                                    var userMoviesId = res; //as string  
+                                    window.location.href = "#/login";
+                                    toastr.success(`User created Successfully!Please login`);
+
+                                })
+                                .catch(function(err) {
+                                    toastr.error(JSON.stringify(err.message));
+                                });
+                        }
+                    })
+                    .catch(function(err) {
+                        toastr.error(JSON.stringify(err.message));
+                    });
+
+            });
         });
 }
 
@@ -19,6 +49,22 @@ export function login() {
     templatesLoader.get('login')
         .then(template => {
             $contentDiv.html(template());
+            $("#btn-log").on("click", function() {
+                var user = {
+                    username: $("#userName-log").val(),
+                    password: $("#password-log").val()
+                        // shouldRemember:$("#password-log").val(),
+                };
+                data.signIn(user)
+                    .then(function(res) {
+                        console.log(res);
+                    })
+                    .catch(function(err) {
+                        toastr.error(err.responseText);
+                    });
+
+
+            });
         });
 }
 
