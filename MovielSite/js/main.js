@@ -16,26 +16,27 @@ router.on('register', userControler.register)
     .on('watch', openNearestCinema)
     .on('users', userControler.getAll)
     .on('movies', mController.showNewestMovies)
-    // .on('login', userController.login)
-    // .on('about', controller.showAbout)
-    // .on('logout', userController.logout)
-    // .on('user-panel', controller.showUserPanel)
-    // .on('posts/:id', (params) => controller.showPostByID(params))
-    // .on('posts', (params) => controller.postWorking(params))
-    // .on('user/:userID', (params) => controller.showUserPosts(params))
-    // .on('home', function() {
-    //     $contentDiv.text('');
-    // })
-    // 
-    // .on('login', function() {
-    //     templatesLoader.get('login')
-    //         .then(template => {
-    //             $contentDiv.html(template());
-    //         });
-    // })
-    // .on(() => {
-    //     router.navigate('/home');
-    // });
+    .on('login', userControler.login);
+// .on('login', userController.login)
+// .on('about', controller.showAbout)
+// .on('logout', userController.logout)
+// .on('user-panel', controller.showUserPanel)
+// .on('posts/:id', (params) => controller.showPostByID(params))
+// .on('posts', (params) => controller.postWorking(params))
+// .on('user/:userID', (params) => controller.showUserPosts(params))
+// .on('home', function() {
+//     $contentDiv.text('');
+// })
+// 
+// .on('login', function() {
+//     templatesLoader.get('login')
+//         .then(template => {
+//             $contentDiv.html(template());
+//         });
+// })
+// .on(() => {
+//     router.navigate('/home');
+// });
 
 $(window).on('load', () => router.navigate());
 $(window).on('hashchange', () => router.navigate());
