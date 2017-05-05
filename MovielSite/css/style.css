@@ -420,3 +420,8 @@ footer ul li:hover .fa {
 #login-form {
     border-radius: 20px;
 }
+
+#back-to-log {
+    margin-top: -20%;
+    margin-bottom: 10%;
+}

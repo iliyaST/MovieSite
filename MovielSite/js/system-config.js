@@ -16,6 +16,7 @@ SystemJS.config({
         'closestCinema': 'js/ClosestCinema.js',
         'watchControler': 'js/controlers/watchControler.js',
         'movieControler': 'js/controlers/movieControler.js',
+        'authenticator': 'js/common/authenticator.js',
         'constants': 'js/common/constants.js',
         //    'homeController': 'js/controllers/home.js',
         //    'myCookieController': 'js/controllers/myCookie.js',

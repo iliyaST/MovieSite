@@ -1,6 +1,7 @@
 import * as requester from 'requester';
 
-//make calls to sql;
+const LOCAL_STORAGE_USERNAME_KEY = 'signed-in-user-username';
+const LOCAL_STORAGE_AUTHKEY_KEY = 'signed-in-user-auth-key';
 
 var transform = function(obj) {
     var str = [];
@@ -54,18 +55,16 @@ export function signIn(user) {
     var body = transform(reqUser);
 
     var header = { "ContentType": "application/x-www-form-urlencoded" };
-
+    //should check if to remember
     return requester.postSql('token', {}, body, contentType)
         .then(function(resp) {
-            console.log(resp);
-            var user = resp.result;
-            localStorage.setItem(LOCAL_STORAGE_USERNAME_KEY, user.username);
-            localStorage.setItem(LOCAL_STORAGE_AUTHKEY_KEY, user.authKey);
-            return user;
+            localStorage.setItem(LOCAL_STORAGE_USERNAME_KEY, resp.userName);
+            localStorage.setItem(LOCAL_STORAGE_AUTHKEY_KEY, resp.token_type + " " + resp.access_token);
+            return resp.userName;
         });
 }
 
-function signOut() {
+export function signOut() {
     var promise = new Promise(function(resolve, reject) {
         localStorage.removeItem(LOCAL_STORAGE_USERNAME_KEY);
         localStorage.removeItem(LOCAL_STORAGE_AUTHKEY_KEY);
@@ -73,3 +72,15 @@ function signOut() {
     });
     return promise;
 }
+
+export function hasUser() {
+    return !!localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY) &&
+        !!localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY);
+}
+
+// export function usersGet() {
+//     return jsonRequester.get('api/users')
+//         .then(function(res) {
+//             return res.result;
+//         });
+// }

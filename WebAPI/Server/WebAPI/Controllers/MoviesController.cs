@@ -7,6 +7,7 @@ using WebAPI.Models.Movies;
 
 namespace WebAPI.Controllers
 {
+    [Authorize]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class MoviesController : ApiController
     {

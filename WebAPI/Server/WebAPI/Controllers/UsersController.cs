@@ -8,6 +8,7 @@
     using System.Web.Http;
     using System.Web.Http.Cors;
 
+    [Authorize]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UsersController : ApiController
     {

@@ -10,7 +10,8 @@ using System.Web.Http.Cors;
 using WebAPI.Models.Comments;
 
 namespace WebAPI.Controllers
-{
+{   
+    [Authorize]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class CommentsController : ApiController
     {
