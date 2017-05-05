@@ -14,7 +14,7 @@ class TemplatesLoader {
                 resolve(Handlebars.compile(this.templatesCache[templateName]));
             }
 
-            $.get(`./templates/${templateName}.html`, template => {
+            $.get(`./templates/${templateName}.handlebars`, template => {
                 this.templatesCache[templateName] = template;
                 resolve(Handlebars.compile(template));
             });

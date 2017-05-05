@@ -92,6 +92,7 @@ export function logout() {
 
 }
 
+//todo remake
 export function getAll() {
     var token = 'Bearer' + "sdfsdfsdf";
     //  sessionStorage.getItem('token');
@@ -106,48 +107,3 @@ export function getAll() {
     //         $appContainer.html(template());
     //     });
 }
-
-// export function tryToRegister() {
-//     const username = $('#username').val();
-//     const password = $('#password').val();
-//     const passHash = password; // HASH ME
-//     const firstName = $('#firstName').val();
-//     const familyName = $('#familyName').val();
-//     const email = $('#email').val();
-//     const city = $('#city').val();
-
-//     var user = new {
-//         username,
-//         passHash,
-//         firstName,
-//         familyName,
-//         email
-//     }
-
-//     data.register(username, passHash)
-//         .then(
-//             result => {
-//                 toastr.success(`User ${username} registered successfully`);
-//                 login()
-//             },
-//             errorMsg => toastr.error(errorMsg));
-// }
-
-
-
-// export function login() {
-//     const username = $('#input-username').val();
-//     const password = $('#input-password').val();
-//     const passHash = password; // HASH ME
-
-//     data.login(username, passHash)
-//         .then(
-//             result => {
-//                 localStorage.setItem(LOCALSTORAGE_AUTH_KEY_NAME, result.result.authKey);
-//                 $('#auth-btn').addClass('hidden');
-//                 $('#signout-btn').removeClass('hidden');
-//                 toastr.success(`Hi, ${username}`);
-//                 location.href = '#/home';
-//             },
-//             errorMsg => toastr.error(errorMsg));
-// }

@@ -1,0 +1,23 @@
+<div id="choose-by">
+    <a id="search-by" href="#/movies/oscar">By oscar</a>
+    <a id="search-by" href="#/movies/upcoming">Get upcoming</a>
+    <a id="search-by" href="#/movies/genre">Search by genre</a>
+    <a id="search-by" href="#/movies/actor">Search by actor</a>
+</div>
+
+<h1 id="top">Top movies</h1>
+<div id="top-movies">
+</div>
+
+
+<ul id="movie-container">
+    {{#this}}
+    <!--<div class="like-container">
+        <span id="likes">likes</span>
+        <span id="dislikes">dislikes</span>
+    </div>-->
+    <li class="current-movie">
+        <img id="current-movie-img" src="../img/images.jpg" alt="">
+    </li>
+    {{/this}}
+</ul>

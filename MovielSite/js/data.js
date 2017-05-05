@@ -3,6 +3,11 @@ import * as requester from 'requester';
 const LOCAL_STORAGE_USERNAME_KEY = 'signed-in-user-username';
 const LOCAL_STORAGE_AUTHKEY_KEY = 'signed-in-user-auth-key';
 
+var setHeader = function() {
+    var token = localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY);
+    return { "Authorization": token };
+};
+
 var transform = function(obj) {
     var str = [];
     for (var p in obj)
@@ -84,3 +89,18 @@ export function hasUser() {
 //             return res.result;
 //         });
 // }
+
+/* Movies */
+export function getTopLikedOrDislikedMovies({ numberOfMovies, liked }) {
+
+
+    var header = setHeader();
+    header["contentType"] = 'application/json';
+    if (liked) {
+        return requester.getSql('api/movies/GetTopLikedMovies/' + numberOfMovies, header);
+    } else {
+        return requester.getSql('api/movies/GetTopDisLikedMovies/' + numberOfMovies, header);
+    }
+
+
+}
