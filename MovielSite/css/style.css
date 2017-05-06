@@ -435,3 +435,12 @@ footer ul li:hover .fa {
 .clickable:hover {
     cursor: pointer;
 }
+
+#details-movie-container {
+    color: black;
+    background-color: white;
+}
+
+#details-movie-container {
+    overflow-y: scroll;
+}

@@ -61,14 +61,22 @@ export function seeMovie(param) {
             var movieData = res;
             data.getMoviesComments(movieData.ImdbID)
                 .then(function(comments) {
-                    console.log(comments);
-                    console.log(movieData);
+                    //only needs moviedata for comments like and dislikes
+                    movie["comments"] = comments;
+                    movie["numberOfLikes"] = movieData.LikesNumber;
+                    movie["numberOfDislikes"] = movieData.DislikesNumber;
+                    // console.log(comments);
+                    // console.log(movieData);
+                    console.log(movie);
                     templatesLoader.get('movie')
                         .then(function(template) {
+                            var movies = [];
+                            movies.push(movie);
+                            $contentDiv.html(template(movies));
 
+                            addMovieClickLogic();
                         });
                 });
-
         });
 }
 
@@ -76,3 +84,75 @@ function getTopLikedOrDislikedMoviesSorted({ numberOfMovies, liked }) {
     var dataToUse;
     return data.getTopLikedOrDislikedMovies({ numberOfMovies, liked });
 }
+
+var addMovieClickLogic = function() {
+    /*Like logic*/
+    $("#like").on("click", function() {
+        var imdbId = $(this).data("id");
+        data.getUserIdByEmail(data.getLogedUser())
+            .then(function(logedUserId) {
+                //check if it is in the database =>if not add it to base
+                data.getMovie(imdbId)
+                    .then(function(res) {
+                        if (res) {
+                            data.likeAMovieOrDislikeAMovie({ userId: logedUserId, imdbId, like: true })
+                                .then(function(numberOflikes) {
+                                    $("#number-of-likes").html(numberOflikes);
+                                })
+                                .catch(function(res) {
+                                    toastr.error("Already liked or disliked");
+                                });
+
+                        } else {
+                            data.addMovie({ name: movie.Title, imdbId })
+                                .then(function() {
+                                    data.likeAMovieOrDislikeAMovie({ userId: logedUserId, imdbId, like: true })
+                                        .then(function(numberOflikes) {
+                                            $("#number-of-likes").html(numberOflikes);
+                                        })
+                                        .catch(function(res) {
+                                            toastr.error("Already liked or disliked");
+                                        });
+                                });
+                        }
+                    });
+            });
+    });
+
+    /*Dislike logic */
+
+    $("#dislike").on("click", function() {
+        var imdbId = $(this).data("id");
+        data.getUserIdByEmail(data.getLogedUser())
+            .then(function(logedUserId) {
+                //check if it is in the database =>if not add it to base
+                data.getMovie(imdbId)
+                    .then(function(res) {
+                        if (res) {
+                            data.likeAMovieOrDislikeAMovie({ userId: logedUserId, imdbId, like: false })
+                                .then(function(numberOfDislikes) {
+                                    $("#number-of-dislikes").html(numberOfDislikes);
+                                })
+                                .catch(function(res) {
+                                    toastr.error("Already liked or disliked");
+                                });
+
+                        } else {
+                            data.addMovie({ name: movie.Title, imdbId })
+                                .then(function() {
+                                    data.likeAMovieOrDislikeAMovie({ userId: logedUserId, imdbId, like: false })
+                                        .then(function(numberOflikes) {
+                                            $("#number-of-dislikes").html(numberOflikes);
+                                        })
+                                        .catch(function(res) {
+                                            toastr.error("Already liked or disliked");
+                                        });
+                                });
+                        }
+                    });
+            });
+    });
+
+
+    /*Comments logic*/
+};

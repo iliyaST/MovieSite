@@ -83,6 +83,17 @@ export function hasUser() {
         !!localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY);
 }
 
+export function getUserIdByEmail(email) {
+    var header = setAuthHeader();
+    header["contentType"] = 'application/json';
+
+    return requester.getSql('api/users/GetById/' + email, header);
+}
+export function getLogedUser() {
+    return localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY);
+}
+
+
 // export function usersGet() {
 //     return jsonRequester.get('api/users')
 //         .then(function(res) {
@@ -108,6 +119,15 @@ export function getMovie(imdbId) {
     return requester.getSql('api/movies/GetById/' + imdbId, header);
 
 }
+
+export function addMovie({ name, imdbId }) {
+    //post to add movie to api
+}
+
+export function likeAMovieOrDislikeAMovie({ userId, imdbId, like }) {
+    //make call to api
+}
+
 
 /* Comments */
 export function getMoviesComments(imdbId) {
