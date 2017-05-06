@@ -100,7 +100,7 @@ var addMovieClickLogic = function() {
                                     $("#number-of-likes").html(numberOflikes);
                                 })
                                 .catch(function(res) {
-                                    toastr.error("Already liked or disliked");
+                                    toastr.error(res.responseText);
                                 });
 
                         } else {
@@ -111,15 +111,17 @@ var addMovieClickLogic = function() {
                                             $("#number-of-likes").html(numberOflikes);
                                         })
                                         .catch(function(res) {
-                                            toastr.error("Already liked or disliked");
+                                            toastr.error(res.responseText);
                                         });
                                 });
                         }
                     });
-            });
+            })
+            .catch(function(err) {});
     });
 
     /*Dislike logic */
+    // !!!!!!!!!!!!!!!!COPY AND RE DO FROM UP
 
     $("#dislike").on("click", function() {
         var imdbId = $(this).data("id");

@@ -86,8 +86,9 @@ export function hasUser() {
 export function getUserIdByEmail(email) {
     var header = setAuthHeader();
     header["contentType"] = 'application/json';
+    var content = "application/json";
 
-    return requester.getSql('api/users/GetById/' + email, header);
+    return requester.postSql('api/users/GetUserIdByName', header, email, content);
 }
 export function getLogedUser() {
     return localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY);
@@ -121,11 +122,26 @@ export function getMovie(imdbId) {
 }
 
 export function addMovie({ name, imdbId }) {
-    //post to add movie to api
+    var header = setAuthHeader();
+    header["contentType"] = 'application/json';
+
+    return requester.postSql("api/movies/Add", { name, imdbId }, headers, {});
 }
 
 export function likeAMovieOrDislikeAMovie({ userId, imdbId, like }) {
-    //make call to api
+    var header = setAuthHeader();
+    header["contentType"] = 'application/json';
+    var content = "application/json";
+
+    if (like) {
+        var likeAMovieObject = { UserId: userId, ImdbID: imdbId };
+
+        return requester.postSqlStringify("api/movies/LikeAMovie", header, likeAMovieObject, content);
+    } else {
+        var likeAMovieObject = { UserId: userId, ImdbID: imdbId };
+
+        return requester.postSqlStringify("api/movies/DislikeAMovie", header, likeAMovieObject, content);
+    }
 }
 
 

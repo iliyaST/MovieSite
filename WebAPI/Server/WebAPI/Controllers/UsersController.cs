@@ -5,6 +5,7 @@
     using MovieDb.Models;
     using System;
     using System.Linq;
+    using System.Net.Http;
     using System.Web.Http;
     using System.Web.Http.Cors;
 
@@ -61,6 +62,19 @@
             var res = GetUser(id);
 
             return this.Ok(new {res.FirstName,res.LastName,res.UserName,res.UsersId,res.isMale,res.City,res.Email });
+
+        }
+        [HttpPost]
+        public IHttpActionResult GetUserIdByName(HttpRequestMessage request)
+        {
+            var email = request.Content.ReadAsStringAsync().Result.Replace("\"", "").Replace("/", "");
+
+            var res = this.users.All().Where(x => x.Expire == false && x.Email == email).FirstOrDefault();
+            if (res == null) {
+                return this.BadRequest("No such user");
+            }
+
+            return this.Ok(res.UsersId);
 
         }
         [AllowAnonymous]

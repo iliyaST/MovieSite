@@ -94,7 +94,7 @@ namespace WebAPI.Controllers
             {
                 return this.BadRequest("Invalid data to like a movie");
             }
-            return this.Ok();
+            return this.Ok(currentMovie.LikesNumber);
         }
 
         public IHttpActionResult DislikeAMovie(LikeAMovieModel model)
@@ -124,7 +124,7 @@ namespace WebAPI.Controllers
             {
                 return this.BadRequest("Invalid data to dislike a movie");
             }
-            return this.Ok();
+            return this.Ok(currentMovie.DislikesNumber);
         }
         
         [HttpGet]
