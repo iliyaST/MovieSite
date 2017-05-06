@@ -3,7 +3,6 @@ import { MyRouter } from 'router';
 import * as userControler from 'userControler';
 import { openNearestCinema } from 'watchControler';
 import * as mController from 'movieControler';
-import { checkIfThereIsLogedInUser } from 'authenticator';
 // import * as homeController from 'homeController';
 // import * as myCookieController from 'myCookieController';
 // import * as userController from 'userController';
@@ -13,15 +12,19 @@ let router = new MyRouter();
 // let controller = new MainController(data);
 
 
-router.on('register', function() { checkIfThereIsLogedInUser({ allowAnonimous: true, callback: userControler.register }); })
-    .on('watch', function() { checkIfThereIsLogedInUser({ allowAnonimous: false, callback: openNearestCinema }); })
-    .on('users', function() { checkIfThereIsLogedInUser({ allowAnonimous: false, callback: userControler.getAll }); })
-    .on('movies', function() { checkIfThereIsLogedInUser({ allowAnonimous: false, callback: mController.showNewestMovies }); })
-    .on('login', function() { checkIfThereIsLogedInUser({ allowAnonimous: true, callback: userControler.login }); })
-    .on('logout', function() { checkIfThereIsLogedInUser({ allowAnonimous: false, callback: userControler.logout }); });
+router.on('register', userControler.register)
+    .on('watch', openNearestCinema)
+    .on('users', userControler.getAll)
+    .on('movies', mController.showNewestMovies)
+    .on('login', userControler.login)
+    .on('home', userControler.home)
+    .on("movies/oscar", mController.getOscarMovies)
+    .on('movies/upcoming', mController.getUpcomingMovies)
+    .on('movies/actor', mController.getByActor)
+    .on('movies/genre', mController.getByGenre);
 // .on('login', userController.login)
 // .on('about', controller.showAbout)
-// 
+// .on('logout', userController.logout)
 // .on('user-panel', controller.showUserPanel)
 // .on('posts/:id', (params) => controller.showPostByID(params))
 // .on('posts', (params) => controller.postWorking(params))

@@ -87,6 +87,90 @@ div#bs-example-navbar-collapse-1.collapse.navbar-collapse {
     height: 100%;
 }
 
+#movie-container {
+    position: relative;
+    top: 50%;
+    left: 2%;
+    width: 100%;
+    height: 47%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border-radius: 15px;
+}
+
+.movie-field:hover>#movie-poster {
+    display: block
+}
+
+#evaluate {
+    position: relative;
+    width: 25px;
+    height: 18px;
+    z-index: 1000000000;
+    left: 5%;
+}
+
+#likes {
+    position: absolute;
+    left: 13%;
+    bottom: 5%;
+    background-color: darkred
+}
+
+#likes-count {
+    color: green;
+    border-radius: 7px;
+    background-color: limegreen;
+    font-weight: 700;
+}
+
+#dislikes-count {
+    color: red;
+    background-color: indianred;
+    border-radius: 7px;
+    font-weight: 700;
+}
+
+#evaluate-text {
+    position: absolute;
+    left: 1%;
+    color: black;
+    font-weight: 700;
+}
+
+#content {
+    position: relative;
+    height: 62%;
+    width: 100%;
+    background-color: darkred;
+    opacity: 0.9;
+    border: 3px solid black;
+    font-weight: 700;
+}
+
+.span-field {
+    position: relative;
+    left: -2%;
+    color: black;
+    font-weight: 700;
+}
+
+.movie-field {
+    padding-left: 3%;
+    color: #F6FA9C;
+    z-index: 10000;
+}
+
+#movie-poster {
+    position: absolute;
+    left: 45%;
+    bottom: 10%;
+    width: 15%;
+    height: 80%;
+    z-index: 100000000000;
+    display: none;
+}
+
 #inner-site {
     float: left;
     width: 50%;
@@ -319,7 +403,7 @@ footer ul li:hover .fa {
 }
 
 #registerForm {
-    margin-top: 100px;
+    margin-top: 1%;
     height: 100%;
     width: 100%;
 }
@@ -339,26 +423,10 @@ footer ul li:hover .fa {
 }
 
 #current-movie-img {
-    width: 200px;
-    height: 200px;
-}
-
-#movie-container {
-    position: absolute;
-    top: 63%;
-    right: 0%;
-    display: inline-flex;
-    width: 100%;
-    overflow-y: hidden;
-    overflow-x: scroll;
-}
-
-#current-movie-title {
-    color: lime;
-    font-family: fantasy;
-    font-weight: 700;
-    font-size: 15px;
-    width: 200px;
+    position: relative;
+    padding-left: 5%;
+    width: 11em;
+    height: 11em;
 }
 
 #choose-by {
@@ -386,8 +454,8 @@ footer ul li:hover .fa {
 
 #top {
     position: absolute;
-    top: 14%;
-    left: 44%;
+    top: 15%;
+    left: 45%;
     border: 3px solid darkslategray;
     background-color: black;
     border-radius: 15px;
@@ -395,13 +463,6 @@ footer ul li:hover .fa {
     font-weight: 700;
     text-decoration: none;
     color: mediumorchid;
-}
-
-.like-container {
-    font-size: 15px;
-    display: inline-flex;
-    z-index: 100000;
-    color: white;
 }
 
 #login-row {
@@ -415,13 +476,32 @@ footer ul li:hover .fa {
     width: 140%;
     height: 100%;
     padding-right: 10%;
+    color: gray;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 1px;
 }
 
 #login-form {
+    padding-bottom: 3%;
     border-radius: 20px;
 }
 
-#back-to-log {
-    margin-top: -20%;
-    margin-bottom: 10%;
+.remember-me-container {
+    position: absolute;
+    padding-top: 2%;
+    color: gray;
+}
+
+#input-search {
+    width: 50%;
+    height: 1%;
+    margin-left: 3%;
+    border-radius: 15px;
+}
+
+.input-search-container {
+    position: absolute;
+    left: 53%;
+    padding-top: 1%;
+    display: inline-flex;
 }

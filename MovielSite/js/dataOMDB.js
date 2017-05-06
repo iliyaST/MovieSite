@@ -1,27 +1,92 @@
 import * as requester from './requester.js';
+import * as constantManager from 'constants';
 
 class DataOMDBController {
 
-    getNewestMovies(currentRequestURL) {
-        return requester.getM(currentRequestURL);
+    getAllMovies() {
+        const keyWords = constantManager.getWords();
+        const resultArray = [];
+
+        keyWords.forEach(word => {
+            let currentRequestURL = `http://www.omdbapi.com/?t=${word}&y=2017&type=movie`;
+            let currentMovies = requester.getM(currentRequestURL);
+            if (currentMovies.Poster != "N/A" && currentMovies.Poster != "") {
+                resultArray.push(currentMovies);
+            }
+        })
+
+        return resultArray;
+    }
+
+    getOscarMovies() {
+        const keyWords = constantManager.getWords();
+        const resultArray = [];
+
+        keyWords.forEach(keyWord => {
+            var currentRequestURL = `http://www.omdbapi.com/?t=${keyWord}&type=movie`;
+            let currentMovies = requester.getM(currentRequestURL);
+
+            if (currentMovies.Awards && currentMovies.Awards != "N/A" && currentMovies.Poster != "N/A" && currentMovies.Poster != "") {
+                let result = currentMovies.Awards;
+                if (result.indexOf("Oscar") > -1) {
+                    resultArray.push(currentMovies);
+                }
+            }
+        });
+
+        return resultArray;
+    }
+
+    getUpcomingMovies() {
+        const keyWords = constantManager.getWords();
+        const resultArray = [];
+
+        keyWords.forEach(word => {
+            let currentRequestURL = `http://www.omdbapi.com/?t=${word}&y=2018&type=movie`;
+            let currentMovies = requester.getM(currentRequestURL);
+            if (currentMovies.Poster != "N/A" && currentMovies.Poster != "") {
+                resultArray.push(currentMovies);
+            }
+        })
+
+        return resultArray;
+    }
+
+    getMoviesByActor(actorName) {
+        const keyWords = constantManager.getWords();
+        const resultArray = [];
+
+        keyWords.forEach(word => {
+            let currentRequestURL = `http://www.omdbapi.com/?t=${word}&type=movie`;
+            let currentMovies = requester.getM(currentRequestURL);
+            if (currentMovies.Poster != "N/A" && currentMovies.Poster != "") {
+                if (currentMovies.Actors && currentMovies.Actors.toLowerCase().includes(actorName.toLowerCase())) {
+                    resultArray.push(currentMovies);
+                }
+            }
+        })
+
+        return resultArray;
     }
 
     getMoviesByGenre(genre) {
-        let resultMovies = [];
+        const keyWords = constantManager.getWords();
+        const resultArray = [];
 
-        this.keyWordsToSearch.forEach(keyWord => {
-            let currentRequestURL = `http://www.omdbapi.com/?t=${keyWord}&type=movie`;
-
-            requester.get(currentRequestURL)
-                .then(result => {
-                    if (result.Poster && result.Genre.toLowerCase().includes(genre.toLowerCase())) {
-                        resultMovies.push(result);
-                    }
-                });
+        keyWords.forEach(word => {
+            let currentRequestURL = `http://www.omdbapi.com/?t=${word}&type=movie`;
+            let currentMovies = requester.getM(currentRequestURL);
+            if (currentMovies.Poster != "N/A" && currentMovies.Poster != "") {
+                if (currentMovies.Genre && currentMovies.Genre.toLowerCase().includes(genre.toLowerCase())) {
+                    resultArray.push(currentMovies);
+                }
+            }
         })
 
-        return resultMovies;
+        return resultArray;
     }
+
+
 
     getMoviesFromPreviousYears(previousYear) {
         let resultMovies = [];
@@ -38,20 +103,7 @@ class DataOMDBController {
         return resultMovies;
     }
 
-    getUpcomingMovies() {
-        let resultMovies = [];
 
-        this.keyWordsToSearch.forEach(keyWord => {
-            var currentRequestURL = `http://www.omdbapi.com/?t=${keyWord}&y=2018&type=movie`;
-
-            requester.get(currentRequestURL)
-                .then(result => {
-                    resultMovies.push(result);
-                });
-        });
-
-        return resultMovies;
-    }
 
     getMoviesByRating(rating) {
         let resultMovies = [];
@@ -78,38 +130,6 @@ class DataOMDBController {
             requester.get(currentRequestURL)
                 .then(result => {
                     if (result.Poster && result.imdbRating >= 8)
-                        resultMovies.push(result);
-                });
-        });
-
-        return resultMovies;
-    }
-
-    getOscarMovies() {
-        let resultMovies = [];
-
-        this.keyWordsToSearch.forEach(keyWord => {
-            var currentRequestURL = `http://www.omdbapi.com/?t=${keyWord}&type=movie`;
-
-            requester.get(currentRequestURL)
-                .then(result => {
-                    if (result.Poster && result.Awards.toLowerCase().includes("oscars"))
-                        resultMovies.push(result);
-                });
-        });
-
-        return resultMovies;
-    }
-
-    getMoviesByActor(actorName) {
-        let resultMovies = [];
-
-        this.keyWordsToSearch.forEach(keyWord => {
-            var currentRequestURL = `http://www.omdbapi.com/?t=${keyWord}&type=movie`;
-
-            requester.get(currentRequestURL)
-                .then(result => {
-                    if (result.Poster && result.Actors.toLowerCase().includes(actorName.toLowerCase()))
                         resultMovies.push(result);
                 });
         });
