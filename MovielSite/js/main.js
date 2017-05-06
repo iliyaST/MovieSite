@@ -13,12 +13,13 @@ let router = new MyRouter();
 // let controller = new MainController(data);
 
 
-router.on('register', function() { checkIfThereIsLogedInUser({ allowAnonimous: true, callback: userControler.register }); })
-    .on('watch', function() { checkIfThereIsLogedInUser({ allowAnonimous: false, callback: openNearestCinema }); })
-    .on('users', function() { checkIfThereIsLogedInUser({ allowAnonimous: false, callback: userControler.getAll }); })
-    .on('movies', function() { checkIfThereIsLogedInUser({ allowAnonimous: false, callback: mController.showNewestMovies }); })
-    .on('login', function() { checkIfThereIsLogedInUser({ allowAnonimous: true, callback: userControler.login }); })
-    .on('logout', function() { checkIfThereIsLogedInUser({ allowAnonimous: false, callback: userControler.logout }); });
+router.on('register', function(params) { checkIfThereIsLogedInUser({ allowAnonimous: true, callback: userControler.register, params }); })
+    .on('watch', function(params) { checkIfThereIsLogedInUser({ allowAnonimous: false, callback: openNearestCinema, params }); })
+    .on('users', function(params) { checkIfThereIsLogedInUser({ allowAnonimous: false, callback: userControler.getAll, params }); })
+    .on('movies', function(params) { checkIfThereIsLogedInUser({ allowAnonimous: false, callback: mController.showNewestMovies, params }); })
+    .on('login', function(params) { checkIfThereIsLogedInUser({ allowAnonimous: true, callback: userControler.login, params }); })
+    .on('logout', function(params) { checkIfThereIsLogedInUser({ allowAnonimous: false, callback: userControler.logout, params }); })
+    .on('movie/:moviedata', function(params) { checkIfThereIsLogedInUser({ allowAnonimous: false, callback: mController.seeMovie, params }); });
 // .on('login', userController.login)
 // .on('about', controller.showAbout)
 // 

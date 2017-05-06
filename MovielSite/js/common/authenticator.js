@@ -1,10 +1,16 @@
 import * as data from 'data';
-export function checkIfThereIsLogedInUser({ allowAnonimous, callback }) {
+export function checkIfThereIsLogedInUser({ allowAnonimous, callback, params }) {
     if (allowAnonimous) {
-        callback();
+        if (params) {
+            return callback(params);
+        }
+        return callback();
     } else {
         if (data.hasUser()) {
-            callback();
+            if (params) {
+                return callback(params);
+            }
+            return callback();
         } else {
             window.location.href = "#/login";
             toastr.error("Please log in first");

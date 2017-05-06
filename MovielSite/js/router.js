@@ -33,7 +33,7 @@ class MyRouter {
         const targetUrlWord = targetUrl.split(/\//g);
 
         //if target and current are with differen length return false -> no match
-        if (targetUrl.length !== currentUrl.length) {
+        if (targetUrlWord[0].length !== currentUrlWords[0].length) {
             return false;
         }
 
@@ -49,8 +49,8 @@ class MyRouter {
                     return false;
                 }
             } else {
-                const paramName = targetUrlParts[i].slice(1);
-                params[paramName] = currentUrlParts[i];
+                const paramName = targetUrlWord[i].slice(1);
+                params[paramName] = decodeURIComponent(currentUrlWords[i]);
             }
         }
 

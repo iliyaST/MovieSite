@@ -3,7 +3,7 @@ import * as requester from 'requester';
 const LOCAL_STORAGE_USERNAME_KEY = 'signed-in-user-username';
 const LOCAL_STORAGE_AUTHKEY_KEY = 'signed-in-user-auth-key';
 
-var setHeader = function() {
+var setAuthHeader = function() {
     var token = localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY);
     return { "Authorization": token };
 };
@@ -92,15 +92,28 @@ export function hasUser() {
 
 /* Movies */
 export function getTopLikedOrDislikedMovies({ numberOfMovies, liked }) {
-
-
-    var header = setHeader();
+    var header = setAuthHeader();
     header["contentType"] = 'application/json';
     if (liked) {
         return requester.getSql('api/movies/GetTopLikedMovies/' + numberOfMovies, header);
     } else {
         return requester.getSql('api/movies/GetTopDisLikedMovies/' + numberOfMovies, header);
     }
+}
 
+export function getMovie(imdbId) {
+    var header = setAuthHeader();
+    header["contentType"] = 'application/json';
+
+    return requester.getSql('api/movies/GetById/' + imdbId, header);
+
+}
+
+/* Comments */
+export function getMoviesComments(imdbId) {
+    var header = setAuthHeader();
+    header["contentType"] = 'application/json';
+
+    return requester.getSql('api/comments/GetAllCommentsForAMovie/' + imdbId, header);
 
 }

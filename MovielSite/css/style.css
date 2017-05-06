@@ -382,6 +382,8 @@ footer ul li:hover .fa {
     position: absolute;
     top: 25%;
     display: inline-flex;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 #top {
@@ -424,4 +426,12 @@ footer ul li:hover .fa {
 #back-to-log {
     margin-top: -20%;
     margin-bottom: 10%;
+}
+
+.title {
+    color: white;
+}
+
+.clickable:hover {
+    cursor: pointer;
 }
