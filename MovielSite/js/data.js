@@ -4,7 +4,7 @@ const LOCAL_STORAGE_USERNAME_KEY = 'signed-in-user-username';
 const LOCAL_STORAGE_AUTHKEY_KEY = 'signed-in-user-auth-key';
 
 var setAuthHeader = function() {
-    var token = localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY);
+    var token = localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY) || sessionStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY);
     return { "Authorization": token };
 };
 
@@ -63,8 +63,14 @@ export function signIn(user) {
     //should check if to remember
     return requester.postSql('token', {}, body, contentType)
         .then(function(resp) {
-            localStorage.setItem(LOCAL_STORAGE_USERNAME_KEY, resp.userName);
-            localStorage.setItem(LOCAL_STORAGE_AUTHKEY_KEY, resp.token_type + " " + resp.access_token);
+            if (user.shouldRemember) {
+                localStorage.setItem(LOCAL_STORAGE_USERNAME_KEY, resp.userName);
+                localStorage.setItem(LOCAL_STORAGE_AUTHKEY_KEY, resp.token_type + " " + resp.access_token);
+            } else {
+                sessionStorage.setItem(LOCAL_STORAGE_USERNAME_KEY, resp.userName);
+                sessionStorage.setItem(LOCAL_STORAGE_AUTHKEY_KEY, resp.token_type + " " + resp.access_token);
+            }
+
             return resp.userName;
         });
 }
@@ -73,14 +79,19 @@ export function signOut() {
     var promise = new Promise(function(resolve, reject) {
         localStorage.removeItem(LOCAL_STORAGE_USERNAME_KEY);
         localStorage.removeItem(LOCAL_STORAGE_AUTHKEY_KEY);
+        sessionStorage.removeItem(LOCAL_STORAGE_USERNAME_KEY);
+        sessionStorage.removeItem(LOCAL_STORAGE_AUTHKEY_KEY);
         resolve();
     });
     return promise;
 }
 
 export function hasUser() {
-    return !!localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY) &&
-        !!localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY);
+    return (!!localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY) &&
+            !!localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)) ||
+        (!!sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY) &&
+            !!sessionStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY));
+
 }
 
 export function getUserIdByEmail(email) {
@@ -91,7 +102,7 @@ export function getUserIdByEmail(email) {
     return requester.postSql('api/users/GetUserIdByName', header, email, content);
 }
 export function getLogedUser() {
-    return localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY);
+    return localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY) || sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY);
 }
 
 

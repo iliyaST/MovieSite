@@ -58,8 +58,8 @@ export function login() {
             $("#btn-log").on("click", function() {
                 var user = {
                     username: $("#userName-log").val(),
-                    password: $("#password-log").val()
-                        // shouldRemember:$("#password-log").val(),
+                    password: $("#password-log").val(),
+                    shouldRemember: $("#remember-me").is(":checked")
                 };
                 data.signIn(user)
                     .then(function(res) {

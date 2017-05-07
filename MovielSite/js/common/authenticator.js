@@ -13,6 +13,7 @@ export function checkIfThereIsLogedInUser({ allowAnonimous, callback, params }) 
             return callback();
         } else {
             window.location.href = "#/login";
+            $("#btn-login").trigger("click");
             toastr.error("Please log in first");
         }
     }
