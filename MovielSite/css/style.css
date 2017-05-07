@@ -422,7 +422,7 @@ footer ul li:hover .fa {
     margin-bottom: 500px;
 }
 
-#current-movie-img {
+.current-movie-img {
     width: 200px;
     height: 200px;
 }

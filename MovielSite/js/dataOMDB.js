@@ -3,6 +3,19 @@ import * as constantManager from 'constants';
 
 class DataOMDBController {
 
+    addDataAndRemoveNAFields(array) {
+        return array.map(function(x) {
+            //delete all props that are n/a
+            for (var i in x) {
+                if (x[i] === "N/A") {
+                    delete x[i];
+                }
+            }
+            x["data"] = JSON.stringify(x);
+            return x;
+        });
+    }
+
     getAllMovies() {
         const keyWords = constantManager.getWords();
         const resultArray = [];
@@ -15,16 +28,7 @@ class DataOMDBController {
             }
         });
 
-        return resultArray.map(function(x) {
-            //delete all props that are n/a
-            for (var i in x) {
-                if (x[i] === "N/A") {
-                    delete x[i];
-                }
-            }
-            x["data"] = JSON.stringify(x);
-            return x;
-        });
+        return this.addDataAndRemoveNAFields(resultArray);
     }
 
 
@@ -44,7 +48,7 @@ class DataOMDBController {
             }
         });
 
-        return resultArray;
+        return this.addDataAndRemoveNAFields(resultArray);
     }
 
     getUpcomingMovies() {
@@ -57,9 +61,9 @@ class DataOMDBController {
             if (currentMovies.Poster != "N/A" && currentMovies.Poster != "") {
                 resultArray.push(currentMovies);
             }
-        })
+        });
 
-        return resultArray;
+        return this.addDataAndRemoveNAFields(resultArray);
     }
 
     getMoviesByActor(actorName) {
@@ -74,9 +78,9 @@ class DataOMDBController {
                     resultArray.push(currentMovies);
                 }
             }
-        })
+        });
 
-        return resultArray;
+        return this.addDataAndRemoveNAFields(resultArray);
     }
 
     getMoviesByGenre(genre) {
@@ -91,9 +95,9 @@ class DataOMDBController {
                     resultArray.push(currentMovies);
                 }
             }
-        })
+        });
 
-        return resultArray;
+        return this.addDataAndRemoveNAFields(resultArray);
     }
 
 
@@ -110,7 +114,7 @@ class DataOMDBController {
                 });
         });
 
-        return resultMovies;
+        return this.addDataAndRemoveNAFields(resultArray);
     }
 
 
@@ -128,7 +132,7 @@ class DataOMDBController {
                 });
         });
 
-        return resultMovies;
+        return this.addDataAndRemoveNAFields(resultArray);
     }
 
     getTopRatingMovies() {
@@ -144,7 +148,7 @@ class DataOMDBController {
                 });
         });
 
-        return resultMovies;
+        return this.addDataAndRemoveNAFields(resultArray);
     }
 }
 

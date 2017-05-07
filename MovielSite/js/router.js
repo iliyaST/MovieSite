@@ -33,7 +33,7 @@ class MyRouter {
         const targetUrlWord = targetUrl.split(/\//g);
 
         //if target and current are with differen length return false -> no match
-        if (targetUrlWord[0].length !== currentUrlWords[0].length) {
+        if (targetUrlWord.length !== currentUrlWords.length) {
             return false;
         }
 

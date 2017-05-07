@@ -9,23 +9,25 @@ const keyWords = constantManager.getWords();
 
 
 export function getOscarMovies() {
-    templatesLoader.get('movies')
+    templatesLoader.get('searchedMovies')
         .then(template => {
             let movies = OMDBController.getOscarMovies();
             console.log(movies);
             let result = template(movies);
-            $contentDiv.html(result);
-        })
+            $("#movie-container").html(result);
+            addMovieImgClick(movies);
+        });
 }
 
 export function getUpcomingMovies() {
-    templatesLoader.get('movies')
+    templatesLoader.get('searchedMovies')
         .then(template => {
             let movies = OMDBController.getUpcomingMovies();
             console.log(movies);
             let result = template(movies);
-            $contentDiv.html(result);
-        })
+            $("#movie-container").html(result);
+            addMovieImgClick(movies);
+        });
 }
 
 export function getByActor() {
@@ -33,15 +35,16 @@ export function getByActor() {
     let actorName = $('.actor').val();
 
     if (actorName !== "") {
-        templatesLoader.get('movies')
+        templatesLoader.get('searchedMovies')
             .then(template => {
                 let movies = OMDBController.getMoviesByActor(actorName);
                 console.log(movies);
                 let result = template(movies);
-                $contentDiv.html(result);
-                $('.actor').val();
+                $("#movie-container").html(result);
+                $('.genre').val("");
                 location.hash = "#/movies/actor/search";
-            })
+                addMovieImgClick(movies);
+            });
     } else {
         location.hash = "#/movies";
     }
@@ -52,15 +55,16 @@ export function getByGenre() {
     let genreName = $('.genre').val();
 
     if (genreName !== "") {
-        templatesLoader.get('movies')
+        templatesLoader.get('searchedMovies')
             .then(template => {
                 let movies = OMDBController.getMoviesByGenre(genreName);
                 console.log(movies);
                 let result = template(movies);
-                $contentDiv.html(result);
-                $('.genre').val();
+                $("#movie-container").html(result);
+                $('.actor').val("");
                 location.hash = "#/movies/genre/search";
-            })
+                addMovieImgClick(movies);
+            });
     } else {
         location.hash = "#/movies";
     }
@@ -73,22 +77,7 @@ export function showNewestMovies() {
             // console.log(movies);
             let result = template(movies);
             $contentDiv.html(result);
-            getTopLikedOrDislikedMoviesSorted({ numberOfMovies: 5, liked: true })
-                .then(function(res) {
-                    templatesLoader.get('topMovies')
-                        .then(function(template) {
-                            if (res) {
-                                var dataToRender = movies.filter(x => res.indexOf(x["imdbID"]) >= 0);
-                                $("#top-movies").html(template(dataToRender));
-                            } else {
-                                $("#top-movies").html("<h2 class='title center'>Currently no Top Movies</h2>");
-                            }
-                            $(".current-movie.clickable,.movie-poster-container.clickable").on("click", function() {
-                                var data = $(this).children("div.data").text();
-                                window.location.href = "#/movie/" + encodeURIComponent(data);
-                            });
-                        });
-                });
+            addMovieImgClick(movies);
         });
 }
 
@@ -162,7 +151,6 @@ var addMovieClickLogic = function() {
     });
 
     /*Dislike logic */
-    // !!!!!!!!!!!!!!!!COPY AND RE DO FROM UP
 
     $("#dislike").on("click", function() {
         var imdbId = $(this).data("id");
@@ -173,31 +161,36 @@ var addMovieClickLogic = function() {
                     .then(function(res) {
                         if (res) {
                             data.likeAMovieOrDislikeAMovie({ userId: logedUserId, imdbId, like: false })
-                                .then(function(numberOfDislikes) {
-                                    $("#number-of-dislikes").html(numberOfDislikes);
+                                .then(function(numberOfdislikes) {
+                                    $("#number-of-dislikes").html(numberOfdislikes);
                                 })
                                 .catch(function(res) {
-                                    toastr.error("Already liked or disliked");
+                                    toastr.error(res.responseText);
                                 });
 
                         } else {
                             data.addMovie({ name: movie.Title, imdbId })
                                 .then(function() {
                                     data.likeAMovieOrDislikeAMovie({ userId: logedUserId, imdbId, like: false })
-                                        .then(function(numberOflikes) {
-                                            $("#number-of-dislikes").html(numberOflikes);
+                                        .then(function(numberOfdislikes) {
+                                            $("#number-of-dislikes").html(numberOfdislikes);
                                         })
                                         .catch(function(res) {
-                                            toastr.error("Already liked or disliked");
+                                            toastr.error(res.responseText);
                                         });
                                 });
                         }
                     });
-            });
+            })
+            .catch(function(err) {});
     });
 
 
     /*Comments logic*/
+    $("#comments").on("click", function() {
+
+    });
+
 };
 
 // function getAllMovies() {
@@ -220,3 +213,50 @@ var addMovieClickLogic = function() {
 //         return x;
 //     });
 // }
+
+
+var addMovieImgClick = function(movies) {
+    getTopLikedOrDislikedMoviesSorted({ numberOfMovies: 5, liked: true })
+        .then(function(res) {
+            templatesLoader.get('topMovies')
+                .then(function(template) {
+                    if (res) {
+                        //take top movies from all movies array
+                        var dataToRender = movies.filter(x => res.indexOf(x["imdbID"]) >= 0);
+                        if (dataToRender.length !== 0) {
+                            $("#top-movies").html(template(dataToRender));
+                        } else {
+                            $("#top-movies").html("<h2 class='title center'>Currently no Top Movies</h2>");
+                        }
+                    } else {
+                        $("#top-movies").html("<h2 class='title center'>Currently no Top Movies</h2>");
+                    }
+
+                    $(".current-movie.clickable,.movie-poster-container.clickable").on("click", function() {
+                        var movieDataString = $(this).children("div.data").text();
+                        var movieData = JSON.parse(movieDataString);
+                        //if it is from topmovies it means it is already in the base
+                        if ($(this).hasClass("topMovie")) {
+                            window.location.href = "#/movie/" + encodeURIComponent(movieDataString);
+                        } else {
+                            var imdbId = movieData.imdbID;
+                            //check if it is in the base
+                            data.getMovie(imdbId)
+                                .then(function(res) {
+                                    if (res) {
+                                        window.location.href = "#/movie/" + encodeURIComponent(movieDataString);
+                                    } else {
+                                        data.addMovie({ name: movieData.Title, imdbId: movieData.imdbID })
+                                            .then(function() {
+                                                window.location.href = "#/movie/" + encodeURIComponent(movieDataString);
+                                            })
+                                            .catch(function(err) {
+                                                console.log(err);
+                                            });
+                                    }
+                                });
+                        }
+                    });
+                });
+        });
+};

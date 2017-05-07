@@ -135,8 +135,9 @@ export function getMovie(imdbId) {
 export function addMovie({ name, imdbId }) {
     var header = setAuthHeader();
     header["contentType"] = 'application/json';
+    var content = 'application/json';
 
-    return requester.postSql("api/movies/Add", { name, imdbId }, headers, {});
+    return requester.postSqlStringify("api/movies/Add", header, { Name: name, ImdbID: imdbId }, content);
 }
 
 export function likeAMovieOrDislikeAMovie({ userId, imdbId, like }) {
