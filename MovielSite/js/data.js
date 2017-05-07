@@ -158,10 +158,30 @@ export function likeAMovieOrDislikeAMovie({ userId, imdbId, like }) {
 
 
 /* Comments */
-export function getMoviesComments(imdbId) {
+export function getAllCommentsForAMovie(imdbId) {
     var header = setAuthHeader();
     header["contentType"] = 'application/json';
 
     return requester.getSql('api/comments/GetAllCommentsForAMovie/' + imdbId, header);
+}
 
+export function addAComment({ UserId, ImdbId, Text }) {
+
+    var model = { UserId, ImdbId, Text };
+
+    var header = setAuthHeader();
+    header["contentType"] = 'application/json';
+    var content = "application/json";
+
+    return requester.postSqlStringify("api/comments/CreateComment", header, model, content);
+}
+
+export function deleteComment(commentId) {
+
+    var header = setAuthHeader();
+    header["contentType"] = 'application/json';
+    var content = "application/json";
+    var body = { "CommentId": commentId };
+
+    return requester.putSql("api/comments/DeleteComment", header, body, content);
 }

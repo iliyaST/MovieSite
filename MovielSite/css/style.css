@@ -499,14 +499,21 @@ footer ul li:hover .fa {
 }
 
 #details-movie-container {
+    padding-left: 5%;
+    position: relative;
+    height: 100%;
+    display: block;
     color: black;
     background-color: white;
     opacity: 0.9;
-}
-
-#details-movie-container {
     overflow-y: scroll;
 }
+
+
+/*
+#details-movie-container {
+    overflow-y: scroll;
+}*/
 
 .like-container {
     font-size: 15px;
@@ -554,4 +561,14 @@ footer ul li:hover .fa {
     left: 53%;
     padding-top: 1%;
     display: inline-flex;
+}
+
+#comments-container {
+    position: relative;
+}
+
+#comment-form {
+    margin-bottom: 1%;
+    margin-top: 2%;
+    margin-left: -5%;
 }
