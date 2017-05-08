@@ -176,16 +176,12 @@ export function userProfile() {
 
 //todo remake
 export function getAll() {
-    var token = 'Bearer' + "sdfsdfsdf";
-    //  sessionStorage.getItem('token');
-    var header = new Object();
-    header.Authorization = token;
-    requester.getSql(WEB_API_SQL + 'api/users/get', token)
-        .then(result => {
-            $contentDiv.html(result);
+    data.getAllUsers()
+        .then(function(users) {
+            var userData = users;
+            templatesLoader.get('users')
+                .then(template => {
+                    $contentDiv.html(template(userData));
+                });
         });
-    // loadTemplate('auth')
-    //     .then(template => {
-    //         $appContainer.html(template());
-    //     });
 }

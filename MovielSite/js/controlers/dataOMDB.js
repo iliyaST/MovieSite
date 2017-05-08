@@ -1,4 +1,4 @@
-import * as requester from './requester.js';
+import * as requester from 'requester';
 import * as constantManager from 'constants';
 
 class DataOMDBController {

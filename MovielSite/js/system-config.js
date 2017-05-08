@@ -12,7 +12,7 @@ SystemJS.config({
         'data': 'js/data.js',
         'userControler': 'js/controlers/userControler.js',
         'templatesLoader': "js/template-loader.js",
-        "dataOMDBManager": 'js/dataOMDB.js',
+        "dataOMDBManager": 'js/controlers/dataOMDB.js',
         'closestCinema': 'js/ClosestCinema.js',
         'watchControler': 'js/controlers/watchControler.js',
         'movieControler': 'js/controlers/movieControler.js',

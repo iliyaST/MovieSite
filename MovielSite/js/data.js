@@ -129,12 +129,12 @@ export function changeUserPassword(password) {
     return requester.postSqlStringify('api/Account/ChangePassword', header, password, content);
 }
 
-// export function usersGet() {
-//     return jsonRequester.get('api/users')
-//         .then(function(res) {
-//             return res.result;
-//         });
-// }
+export function getAllUsers() {
+    var header = setAuthHeader();
+    header["contentType"] = 'application/json';
+
+    return requester.getSql('api/users/Get', header);
+}
 
 /* Movies */
 export function getTopLikedOrDislikedMovies({ numberOfMovies, liked }) {

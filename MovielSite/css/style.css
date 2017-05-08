@@ -523,6 +523,17 @@ footer ul li:hover .fa {
     overflow-y: scroll;
 }
 
+#users-container {
+    border-radius: 10px;
+    position: relative;
+    height: 100%;
+    display: block;
+    color: black;
+    background-color: white;
+    opacity: 0.9;
+    overflow-y: scroll;
+}
+
 
 /*
 #details-movie-container {
