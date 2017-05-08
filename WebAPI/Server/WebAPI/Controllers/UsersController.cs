@@ -24,7 +24,7 @@
         public IHttpActionResult Register(Users user)
         {
             var allUsersQuearable = this.users.All();
-            var userWithThisNameCount = allUsersQuearable.Where(x => x.UserName == user.UserName).Count();
+            var userWithThisNameCount = allUsersQuearable.Where(x => x.Email == user.Email).Count();
          
             if (userWithThisNameCount > 0)
             {

@@ -23,6 +23,7 @@ export function register() {
                 if (e.isDefaultPrevented()) {
                     // handle the invalid form...
                 } else {
+                    e.preventDefault();
                     var cityVal;
                     if ($("#city").val().trim()) {
                         cityVal = $("#city").val();
@@ -49,7 +50,7 @@ export function register() {
                                         toastr.success(`User created Successfully!Please login`);
                                     })
                                     .catch(function(err) {
-                                        toastr.error(JSON.stringify(err.message));
+                                        toastr.error(JSON.stringify(err.responseText.Message));
                                     });
                             }
                         })
@@ -66,8 +67,8 @@ export function login() {
     templatesLoader.get('login')
         .then(template => {
             $contentDiv.html(template());
-
-            $("#btn-log").on("click", function() {
+            $("#btn-log").on("click", function(e) {
+                e.preventDefault();
                 var user = {
                     username: $("#userName-log").val(),
                     password: $("#password-log").val(),
@@ -127,47 +128,46 @@ export function userProfile() {
                                 $('#femaleRadio').attr('checked', true);
                             }
                             $("#btn-change-user-info").on("click", function(e) {
-                                if (e.isDefaultPrevented()) {
+                                e.preventDefault();
+                                var newpassword = $("#newPassword").val();
+                                var oldpassword = $("#currentPassword").val();
+                                if ((newpassword.trim() && oldpassword.trim()) || (!newpassword.trim() && !oldpassword.trim())) {
+                                    var newUserInfo;
+                                    newUserInfo = {
+                                        FirstName: $("#firstName").val().trim() ? $("#firstName").val() : userData[0].FirstName,
+                                        LastName: $("#familyName").val().trim() ? $("#familyName").val() : userData[0].LastName,
+                                        UserName: $("#username").val().trim() ? $("#username").val() : userData[0].UserName,
+                                        City: $("#city").val().trim() ? $("#city").val() : null,
+                                        isMale: ($('input[name=gender]:checked').val() === 'true') ? true : false,
+                                        Email: $("#email").val().trim() ? $("#email").val() : userData[0].Email
+                                    };
 
+                                    data.updataMovieUser(newUserInfo)
+                                        .then(function() {
+                                            if (newpassword.trim()) {
+                                                var newPasswords = {
+                                                    OldPassword: oldpassword,
+                                                    NewPassword: newpassword,
+                                                    ConfirmPassword: newpassword
+                                                };
+                                                data.changeUserPassword(newPasswords)
+                                                    .then(function() {
+                                                        toastr.success("Succesfully changed user info and password!");
+                                                    })
+                                                    .catch(function(err) {
+                                                        console.log(err);
+                                                    });
+                                            } else {
+                                                toastr.success("Succesfully changed user info!");
+                                            }
+                                        })
+                                        .catch(function(err) {
+                                            console.log(err);
+                                        });
                                 } else {
-                                    var newpassword = $("#newPassword").val();
-                                    var oldpassword = $("#currentPassword").val();
-                                    if ((newpassword.trim() && oldpassword.trim()) || (!newpassword.trim() && !oldpassword.trim())) {
-                                        var newUserInfo;
-                                        newUserInfo = {
-                                            FirstName: $("#firstName").val().trim() ? $("#firstName").val() : userData[0].FirstName,
-                                            LastName: $("#familyName").val().trim() ? $("#familyName").val() : userData[0].LastName,
-                                            UserName: $("#username").val().trim() ? $("#username").val() : userData[0].UserName,
-                                            City: $("#city").val().trim() ? $("#city").val() : null,
-                                            isMale: ($('input[name=gender]:checked').val() === 'true') ? true : false,
-                                            Email: $("#email").val().trim() ? $("#email").val() : userData[0].Email
-                                        };
-
-                                        data.updataMovieUser(newUserInfo)
-                                            .then(function() {
-                                                if (newpassword.trim()) {
-                                                    var newPasswords = {
-                                                        OldPassword: oldpassword,
-                                                        NewPassword: newpassword,
-                                                        ConfirmPassword: newpassword
-                                                    };
-                                                    data.changeUserPassword(newPasswords)
-                                                        .then(function() {
-                                                            window.location.href = "#/movies";
-                                                            toastr.success("Succesfully changed user info!");
-                                                        })
-                                                        .catch(function(err) {
-                                                            console.log(err);
-                                                        });
-                                                }
-                                            })
-                                            .catch(function(err) {
-                                                console.log(err);
-                                            });
-                                    } else {
-                                        toastr.error("Please fill both passwords or leave them both empty")
-                                    }
+                                    toastr.error("Please fill both passwords or leave them both empty")
                                 }
+
                             });
                         });
                 });
