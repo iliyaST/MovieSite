@@ -84,7 +84,7 @@ class ClosestCinema {
         let myPromise = new Promise((resolve, reject) => {
             navigator.geolocation.getCurrentPosition((pos) => {
                 resolve(pos);
-            })
+            });
         });
 
         function calculateDistance(firstLocation, secondLocation) {
