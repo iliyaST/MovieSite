@@ -157,7 +157,7 @@ div#bs-example-navbar-collapse-1.collapse.navbar-collapse {
 
 .movie-field {
     padding-left: 3%;
-    color: #black;
+    color: black;
     z-index: 10000;
 }
 
@@ -177,7 +177,7 @@ div#bs-example-navbar-collapse-1.collapse.navbar-collapse {
     height: 100%;
 }
 
-find-movie-container {
+.find-movie-container {
     height: 100%;
     width: 100%;
 }
@@ -388,10 +388,6 @@ footer ul li:nth-child(2)::before {
 
 footer ul li:nth-child(3)::before {
     background: #cd201f;
-}
-
-footer ul li:nth-child(4)::before {
-    background: #e4405f;
 }
 
 footer ul li .fa {
@@ -610,3 +606,80 @@ footer ul li:hover .fa {
     height: 100%;
     width: 100%;
 }*/
+
+.social {
+    width: 200%;
+    height: 200%;
+}
+
+.weather {
+    position: absolute;
+    left: 96%;
+    top: 1%;
+}
+
+.embedly-card {
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    left: 14%;
+    top: 15%
+}
+
+.imageSlider {
+    position: relative;
+    left: -10%;
+    width: 40%;
+}
+
+.clock {
+    position: absolute;
+    left: 90%;
+    top: 2%;
+}
+
+#img-to-mtv {
+    position: relative;
+    left: 15%;
+    height: 55%;
+    width: 75%;
+}
+
+#main-container-mtv {
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+#main-container-mtv::-webkit-scrollbar {
+    display: none;
+}
+
+#news-container-mtv {
+    height: 100%;
+}
+
+#title-mtv {
+    color: red;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 300;
+    margin-left: 19%;
+}
+
+#span-mtv {
+    position: absolute;
+    left: 1%;
+    color: lawngreen;
+}
+
+#description-mtv {
+    color: yellow;
+    margin-left: 30%;
+}
+
+#link-to-article-mtv {
+    color: blue;
+    margin-left: 43%;
+}

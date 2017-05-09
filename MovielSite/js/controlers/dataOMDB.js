@@ -1,7 +1,12 @@
 import * as requester from 'requester';
-import * as constantManager from 'constants';
+import { constantManager } from 'constants';
 
 class DataOMDBController {
+
+    constructor() {
+        this.keyWords = constantManager.getWords();
+    }
+
 
     addDataAndRemoveNAFields(array) {
         return array.map(function(x) {
@@ -17,10 +22,9 @@ class DataOMDBController {
     }
 
     getAllMovies() {
-        const keyWords = constantManager.getWords();
         const resultArray = [];
 
-        keyWords.forEach(word => {
+        this.keyWords.forEach(word => {
             let currentRequestURL = `http://www.omdbapi.com/?t=${word}&y=2017&type=movie`;
             let currentMovies = requester.getM(currentRequestURL);
             if (currentMovies.Poster != "N/A" && currentMovies.Poster != "") {
@@ -33,10 +37,9 @@ class DataOMDBController {
 
 
     getOscarMovies() {
-        const keyWords = constantManager.getWords();
         const resultArray = [];
 
-        keyWords.forEach(keyWord => {
+        this.keyWords.forEach(keyWord => {
             var currentRequestURL = `http://www.omdbapi.com/?t=${keyWord}&type=movie`;
             let currentMovies = requester.getM(currentRequestURL);
 
@@ -52,10 +55,9 @@ class DataOMDBController {
     }
 
     getUpcomingMovies() {
-        const keyWords = constantManager.getWords();
         const resultArray = [];
 
-        keyWords.forEach(word => {
+        this.keyWords.forEach(word => {
             let currentRequestURL = `http://www.omdbapi.com/?t=${word}&y=2018&type=movie`;
             let currentMovies = requester.getM(currentRequestURL);
             if (currentMovies.Poster != "N/A" && currentMovies.Poster != "") {
@@ -67,10 +69,9 @@ class DataOMDBController {
     }
 
     getMoviesByActor(actorName) {
-        const keyWords = constantManager.getWords();
         const resultArray = [];
 
-        keyWords.forEach(word => {
+        this.keyWords.forEach(word => {
             let currentRequestURL = `http://www.omdbapi.com/?t=${word}&type=movie`;
             let currentMovies = requester.getM(currentRequestURL);
             if (currentMovies.Poster != "N/A" && currentMovies.Poster != "") {
@@ -84,10 +85,9 @@ class DataOMDBController {
     }
 
     getMoviesByGenre(genre) {
-        const keyWords = constantManager.getWords();
         const resultArray = [];
 
-        keyWords.forEach(word => {
+        this.keyWords.forEach(word => {
             let currentRequestURL = `http://www.omdbapi.com/?t=${word}&type=movie`;
             let currentMovies = requester.getM(currentRequestURL);
             if (currentMovies.Poster != "N/A" && currentMovies.Poster != "") {
