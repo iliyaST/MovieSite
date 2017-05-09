@@ -615,27 +615,13 @@ footer ul li:hover .fa {
 .weather {
     position: absolute;
     left: 96%;
-    top: 1%;
-}
-
-.embedly-card {
-    width: 100%;
-    overflow: hidden;
-    position: absolute;
-    left: 14%;
-    top: 15%
-}
-
-.imageSlider {
-    position: relative;
-    left: -10%;
-    width: 40%;
+    top: 3%;
 }
 
 .clock {
     position: absolute;
     left: 90%;
-    top: 2%;
+    top: 4%;
 }
 
 #img-to-mtv {
@@ -661,25 +647,22 @@ footer ul li:hover .fa {
 }
 
 #title-mtv {
-    color: red;
+    color: white;
     font-size: 25px;
     font-style: normal;
     font-weight: 300;
-    margin-left: 19%;
-}
-
-#span-mtv {
-    position: absolute;
-    left: 1%;
-    color: lawngreen;
+    /*margin-left: 19%;*/
+    text-align: center;
 }
 
 #description-mtv {
-    color: yellow;
-    margin-left: 30%;
+    color: lightgoldenrodyellow;
+    /*margin-left: 30%;*/
+    text-align: center;
 }
 
 #link-to-article-mtv {
-    color: blue;
+    color: green;
     margin-left: 43%;
+    font-weight: bold;
 }
