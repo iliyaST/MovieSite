@@ -285,3 +285,16 @@ describe('Data layer tests', () => {
 
     });
 });
+
+describe('WatchControler tests', () => {
+    it('expect register to make a POST SQL request to api/account/register', (done) => {
+
+        jsonRequesterPostStub.returns(Promise.resolve());
+
+        data.register(user)
+            .then(() => {
+                expect(jsonRequesterPostStub).to.have.been.calledWith('api/account/register');
+            })
+            .then(done, done);
+    });
+});
